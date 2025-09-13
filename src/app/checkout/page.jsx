@@ -13,7 +13,7 @@
 // src/app/checkout/page.jsx
 // app/checkout/page.jsx
 import { Suspense } from "react";
-import CheckoutPageClient from "./components/CheckoutPageClient";
+import CheckoutPageClient from "./checkoutPageClient";
 
 export default function Page() {
   return (
