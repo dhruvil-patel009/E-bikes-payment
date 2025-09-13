@@ -12,7 +12,7 @@
 
 "use client"; // <--- add this
 
-import CheckoutPageClient from "./checkoutPageClient";
+import CheckoutPageClient from "./checkoutPageClient.jsx";
 
 // Force Next.js to skip prerendering (optional, but safer)
 export const dynamic = "force-dynamic";
