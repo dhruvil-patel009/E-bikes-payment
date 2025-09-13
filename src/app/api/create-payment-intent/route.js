@@ -1,10 +1,11 @@
+// src/api/create-payment-intent/route.js
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   try {
-    const { amount, currency = "inr" } = await req.json();
+    const { amount, currency = "aud" } = await req.json();
 
     if (!amount) {
       return new Response(JSON.stringify({ error: "Missing amount" }), {
