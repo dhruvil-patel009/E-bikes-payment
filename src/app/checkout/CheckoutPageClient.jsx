@@ -105,8 +105,21 @@ export default function CheckoutPageClient() {
     if (!clientSecret) return <p>Loading payment...</p>;
 
     return (
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
-            <CheckoutForm clientSecret={clientSecret} amount={amount} currency={currency} />
-        </Elements>
+        <div className="checkout-page">
+            <div className="right-col">
+                <div className="payment-card">
+                    {clientSecret && (
+                        <Elements stripe={stripePromise} options={options}>
+                            <CheckoutForm
+                                clientSecret={clientSecret}
+                                amount={amount}
+                                currency={currency}
+                            />
+                        </Elements>
+                    )}
+                    {!clientSecret && <div className="loading">Loading payment...</div>}
+                </div>
+            </div>
+        </div>
     );
 }
