@@ -102,7 +102,7 @@ export default function CheckoutPageClient() {
         createPaymentIntent();
     }, [amount, currency]);
 
-    if (!clientSecret) return <p>Loading payment...</p>;
+    const options = clientSecret ? { clientSecret } : null;
 
     return (
         <div className="checkout-page">
