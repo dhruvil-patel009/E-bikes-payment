@@ -10,12 +10,11 @@
 // }
 
 
-"use client"; // <--- add this
+// src/app/checkout/page.jsx
+"use client"; // Make the whole page a client component
 
+import React from "react";
 import CheckoutPageClient from "./CheckoutPageClient";
-
-// Force Next.js to skip prerendering (optional, but safer)
-export const dynamic = "force-dynamic";
 
 export default function CheckoutPage() {
   return <CheckoutPageClient />;
