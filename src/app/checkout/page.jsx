@@ -11,7 +11,6 @@
 
 
 // src/app/checkout/page.jsx
-// app/checkout/page.jsx
 import { Suspense } from "react";
 import CheckoutPageClient from "./CheckoutPageClient";
 

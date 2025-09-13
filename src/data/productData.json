@@ -1,0 +1,128 @@
+[
+  {
+    "id": 1,
+    "title": "E-bike 6-8h",
+    "slug": "e_bike",
+    "price": {
+      "current": 60,
+      "original": 70,
+      "currency": "AUD",
+      "stripeAmount": 6500
+    },
+    "images": {
+      "front": "/images/Cartoon-Cycle-remove-text-latest.png",
+      "back": "/images/CartoonCycleProductdetailsBackBlur.jpg",
+      "middle": "/images/CartoonCycleProductdetailsAngleBlur.jpg",
+      "battery": "/images/CartoonCycleProductdetailsWholeBlur.jpg"
+    },
+    "specifications": {
+      "highlights": [
+        { "icon": "bi-battery-full", "label": "Battery Hours", "value": "6-8 hours" },
+        { "icon": "bi-lightning-charge", "label": "Motor", "value": "500W" },
+        { "icon": "bi-clock", "label": "Battery Life", "value": "48V 50A" },
+        { "icon": "bi-wrench", "label": "Maintenance", "value": "Included" }
+      ],
+      "tabs": {
+         "performance": {
+          "speed": ["Gear 1: 25 km/h", "Gear 2: 35 km/h", "Gear 3: 45 km/h"],
+          "life": "48V 50A"
+        },
+        "features": {
+          "display": "Multifunctional LED display, clearly visible under sunlight.",
+          "lighting": [
+            "Front high-brightness headlight with wide aperture",
+            "Rear light with laser projection for night safety"
+          ],
+          "holder": "USB port (2.1A output)"
+        },
+        "safety": {
+          "safety": [
+            "Smart anti-theft remote (alarm + keyless start)",
+            "NFC smart unlock"
+          ],
+          "brake": "Hydraulic disc brakes",
+          "hours": "6–8 hours"
+        }
+       
+      }
+    },
+    "insurance": [
+  "✔ Insurance only covers theft of battery.",
+  "✘ No accident compensation.",
+  "✘ No third-party costs insured."
+],
+    "rentalInfo": {
+      "documents": [
+        "Name",
+        "Phone Number",
+        "Address & Unit Number",
+        "Email",
+        "Valid Visa Grant",
+        "Passport"
+      ],
+      "includes": ["Delivery bag", "Locks (2)", "Helmet", "Charger", "Basic maintenance"]
+    },
+    "socialLinks": {
+      "instagram": "https://www.instagram.com/beyondbikes_vic/",
+      "google": "https://g.co/kgs/66Atysa",
+      "phone": "tel:+61422032961"
+    }
+  },
+  {
+    "id": 2,
+    "title": "Cali Cruiser E-Bike",
+    "slug": "cali-cruiser",
+    "price": {
+      "current": 65,
+      "original": 70,
+      "currency": "AUD",
+      "stripeAmount": 7000
+    },
+    "images": {
+      "front": "/images/Product-images-beyond-bikes-product-one-crop (3).png",
+      "back": "/images/BlueCycleProductDetailsAngleBlur.jpg",
+      "middle": "/images/BlueCycleProductDetailsFrontLatest.jpg",
+      "battery": "/images/BlueCycleProductDetailsBackBlur.jpg"
+    },
+    "specifications": {
+      "tabs": {
+        "performance": {
+          "speed": ["25 km/h", "35 km/h", "45 km/h"],
+          "life": "48V 70A"
+        },
+        "features": {
+          "display": "Multifunctional LED display, clearly visible under sunlight.",
+          "lighting": [
+            "Front high-brightness headlight with wide aperture",
+            "Rear light with laser projection for night safety"
+          ],
+          "holder": "USB port (2.1A output)"
+        },
+        "safety": {
+          "safety": [
+            "Smart anti-theft remote (alarm + keyless start)",
+            "NFC smart unlock"
+          ],
+          "brake": "Hydraulic disc brakes",
+          "hours": "8-10 hours"
+        }
+      }
+    },
+    "insurance": [
+  "✔ Insurance only covers theft of battery.",
+  "✘ No accident compensation.",
+  "✘ No third-party costs insured."
+],"rentalInfo": {
+      "documents": [
+        "Name",
+        "Phone Number",
+        "Address & Unit Number",
+        "Email",
+        "Valid Visa Grant",
+        "Passport"
+      ],
+      "includes": ["Delivery bag", "Locks (2)", "Helmet", "Charger", "Basic maintenance"]
+    }
+  }
+  
+]
