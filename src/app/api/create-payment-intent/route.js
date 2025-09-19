@@ -31,17 +31,19 @@
 //   }
 // }
 
+// src/api/create-payment-intent/route.js
+// src/api/create-payment-intent/route.js
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   try {
-    const { amount, currency } = await req.json();
+    const { amount, currency, metadata, receipt_email } = await req.json();
 
     if (!amount || !currency) {
       return new Response(
-        JSON.stringify({ error: "Missing amount or currency" }),
+        JSON.stringify({ error: "Missing amount/currency" }),
         { status: 400 }
       );
     }
@@ -49,18 +51,22 @@ export async function POST(req) {
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency,
-      automatic_payment_methods: { enabled: true }, // <-- enables wallets like GPay/Apple Pay
+      receipt_email,
+      metadata, // includes name, phone, product
+      automatic_payment_methods: { enabled: true },
     });
 
     return new Response(
       JSON.stringify({ clientSecret: paymentIntent.client_secret }),
-      { status: 200, headers: { "Content-Type": "application/json" } }
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
     );
   } catch (err) {
     console.error("PaymentIntent error:", err);
     return new Response(JSON.stringify({ error: err.message }), {
       status: 500,
-      headers: { "Content-Type": "application/json" },
     });
   }
 }
