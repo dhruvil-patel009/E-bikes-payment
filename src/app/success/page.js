@@ -2,9 +2,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
-export default function SuccessPage() {
+function SuccessContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const [message, setMessage] = useState("Processing your payment...");
@@ -12,7 +12,6 @@ export default function SuccessPage() {
   useEffect(() => {
     if (sessionId) {
       setMessage(`✅ Payment successful! Session ID: ${sessionId}`);
-      // Optional: fetch session details from your backend using sessionId
     }
   }, [sessionId]);
 
@@ -23,5 +22,13 @@ export default function SuccessPage() {
         <p>{message}</p>
       </div>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <SuccessContent />
+    </Suspense>
   );
 }
