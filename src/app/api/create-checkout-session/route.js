@@ -82,10 +82,7 @@ export async function POST(req) {
     //   : `${process.env.NEXT_PUBLIC_BASE_URL}${image}`;
 
     const session = await stripe.checkout.sessions.create({
-      // payment_method_types: ["card"],
-      automatic_payment_methods: {
-        enabled: true,
-      },
+      payment_method_types: ["card"],
       mode: "payment",
       customer_email: email,
       line_items: [
@@ -102,12 +99,12 @@ export async function POST(req) {
         },
       ],
       // Set default locale & country
-      // payment_method_options: {
-      //   card: {
-      //     // Ensures cards are treated as AU cards
-      //     request_three_d_secure: "automatic",
-      //   },
-      // },
+      payment_method_options: {
+        card: {
+          // Ensures cards are treated as AU cards
+          request_three_d_secure: "automatic",
+        },
+      },
 
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout?canceled=true`,
