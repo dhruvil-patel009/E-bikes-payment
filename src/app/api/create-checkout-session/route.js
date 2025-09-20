@@ -149,7 +149,8 @@ export async function POST(req) {
       line_items: [
         {
           price_data: {
-            currency: "AUD",
+            currency: "aud",
+            // country: "AU",
             product_data: {
               name: `E-bike Rental - ${name}`,
               description: `Rental from ${startDate} to ${endDate}`,

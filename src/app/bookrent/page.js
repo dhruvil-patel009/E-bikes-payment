@@ -305,6 +305,8 @@
 //   );
 // }
 
+//src/app/bookrent/page.js
+
 "use client";
 import React, { useState } from "react";
 import Head from "next/head";
@@ -314,6 +316,7 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import "../styles/Payment.css";
+import GooglePayCheck from "../components/GooglePayCheck";
 
 export default function BookRent() {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
@@ -321,18 +324,15 @@ export default function BookRent() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [amount, setAmount] = useState(50); // default amount in display (AUD)
+  const [amount, setAmount] = useState(50); // default AUD
   const [ranges, setRanges] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
+    { startDate: new Date(), endDate: new Date(), key: "selection" },
   ]);
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
+  // Validation
   const validateField = (field, value) => {
     let message = "";
     if (field === "Full Name") {
@@ -347,7 +347,7 @@ export default function BookRent() {
         message = "Enter a valid email address.";
     }
     if (field === "Phone Number") {
-      const phoneRegex = /^[0-9]{8,15}$/; // allow 8-15 digits (AU and others)
+      const phoneRegex = /^[0-9]{8,15}$/;
       if (value && !phoneRegex.test(value))
         message = "Enter a valid phone number (digits only).";
     }
@@ -355,11 +355,10 @@ export default function BookRent() {
     return message === "";
   };
 
+  // Handle checkout
   const handleSubmit = async (e) => {
-    // called by button onClick; if form onSubmit is used, pass event and call e.preventDefault()
-    if (e && e.preventDefault) e.preventDefault();
+    e.preventDefault();
 
-    // basic front-end validation
     const okName = validateField("Full Name", name);
     const okEmail = validateField("Email Address", email);
     const okPhone = validateField("Phone Number", phone);
@@ -373,13 +372,6 @@ export default function BookRent() {
     setLoading(true);
 
     try {
-      console.info("Creating checkout session", {
-        name,
-        email,
-        phone,
-        amount,
-        ranges,
-      });
       const res = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -389,32 +381,22 @@ export default function BookRent() {
           phone,
           startDate: ranges[0].startDate,
           endDate: ranges[0].endDate,
-          // Stripe expects cents
           amount,
-          currency: "AUD",
         }),
       });
 
-      if (!res.ok) {
-        const text = await res.text();
-        console.error("create-checkout-session failed", res.status, text);
-        alert("Server error creating payment session. Check console/network.");
-        setLoading(false);
-        return;
-      }
-
       const data = await res.json();
-      console.info("create-checkout-session response", data);
+      console.log("Available methods:", data.availableMethods);
+
       if (data.url) {
-        // redirect to Stripe Checkout
-        window.location.href = data.url;
+        window.location.href = data.url; // Stripe Checkout redirect
       } else {
-        alert("No redirect URL returned from server. Check console.");
-        console.error("No url in response", data);
+        console.error("No session URL returned", data);
+        alert("Payment session error. Check console.");
       }
     } catch (err) {
       console.error("Error creating checkout session", err);
-      alert("Error creating checkout session. See console for details.");
+      alert("Error creating payment session. Check console.");
     } finally {
       setLoading(false);
     }
@@ -434,11 +416,7 @@ export default function BookRent() {
       <Header />
 
       <main>
-        <section
-          className="py-5"
-          style={{ backgroundColor: "#f8f9fa" }}
-          id="how-to-rent"
-        >
+        <section className="py-5" style={{ backgroundColor: "#f8f9fa" }}>
           <div className="container text-center">
             <h1 className="fw-bold text-dark mb-2">Book Rental E-bike</h1>
             <p className="text-secondary" style={{ fontSize: "16px" }}>
@@ -448,19 +426,12 @@ export default function BookRent() {
 
           <section className="container px-sm-0 px-3 py-3">
             <div className="row g-4 d-flex justify-content-center">
-              <div
-                className="col-lg-6"
-                itemScope
-                itemType="https://schema.org/ContactPage"
-              >
+              <div className="col-lg-6">
                 <div
                   className="interactive-card p-4"
                   style={{ position: "relative" }}
                 >
-                  {/* NOTE: keep onSubmit if you prefer form submission, but we use button onClick */}
-                  <form
-                    className="contact-form" /* onSubmit={(e)=>{e.preventDefault(); handleSubmit(e)}} */
-                  >
+                  <form className="contact-form">
                     <div className="form-floating mb-3">
                       <input
                         type="text"
@@ -546,7 +517,6 @@ export default function BookRent() {
                     <div className="input-group mb-3">
                       <span
                         className="input-group-text"
-                        id="basic-addon1"
                         style={{ padding: ".60rem 1.5rem" }}
                       >
                         $
@@ -555,8 +525,6 @@ export default function BookRent() {
                         type="number"
                         className="form-control"
                         placeholder="Amount (AUD)"
-                        aria-label="PayNow"
-                        aria-describedby="basic-addon1"
                         value={amount}
                         onChange={(e) => setAmount(Number(e.target.value || 0))}
                         min="0"
@@ -575,78 +543,16 @@ export default function BookRent() {
                         style={{
                           background: "#1a3b19",
                           cursor: loading ? "wait" : "pointer",
-                          zIndex: 9999,
-                          pointerEvents: loading ? "none" : "auto",
                         }}
                       >
-                        {loading ? "Processing..." : `Pay Now `}
+                        {loading ? "Processing..." : "Pay Now"}
                       </button>
                     </div>
+                    <GooglePayCheck />
                   </form>
                 </div>
               </div>
             </div>
-          </section>
-
-          <section
-            className="container text-center pt-3"
-            aria-labelledby="expect-heading"
-            itemScope
-            itemType="https://schema.org/Service"
-          >
-            <h2 id="expect-heading" className="mb-4 heading-underline">
-              What to Expect
-            </h2>
-            <div className="row justify-content-center">
-              <article className="col-md-4 mb-4">
-                <div className="step-icon bg-warning text-white rounded-circle mx-auto">
-                  <span>1</span>
-                </div>
-                <h3 className="mt-3">Book Your Slot</h3>
-                <p>Choose your preferred pickup time from available slots.</p>
-              </article>
-              <article className="col-md-4 mb-4">
-                <div className="step-icon bg-warning text-white rounded-circle mx-auto">
-                  <span>2</span>
-                </div>
-                <h3 className="mt-3">Get Confirmation</h3>
-                <p>
-                  Receive pickup details and preparation instructions via email.
-                </p>
-              </article>
-              <article className="col-md-4 mb-4">
-                <div className="step-icon bg-warning text-white rounded-circle mx-auto">
-                  <span>3</span>
-                </div>
-                <h3 className="mt-3">Pick Up & Ride</h3>
-                <p>Come to our location and enjoy your e-bike.</p>
-              </article>
-            </div>
-            <address className="mt-4">
-              <p>
-                Need help? <br />
-                <a href="tel:+61432203305" className="text-decoration-none">
-                  <i
-                    className="bi bi-telephone-fill"
-                    style={{ color: "#1A3B19" }}
-                  ></i>{" "}
-                  <span style={{ color: "#1A3B19" }}> +61 432 203 305</span>
-                </a>
-                <br />
-                <a
-                  href="mailto:info.beyondbikes@gmail.com"
-                  className="text-decoration-none"
-                >
-                  <i
-                    className="bi bi-envelope-fill me-2"
-                    style={{ color: "#1A3B19" }}
-                  ></i>{" "}
-                  <span style={{ color: "#1A3B19" }}>
-                    info.beyondbikes@gmail.com
-                  </span>
-                </a>
-              </p>
-            </address>
           </section>
         </section>
       </main>

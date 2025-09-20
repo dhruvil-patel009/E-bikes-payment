@@ -21,7 +21,7 @@ import {
 } from "@stripe/react-stripe-js";
 // import CheckoutButton from "../../components/CheckoutButton";
 import productsData from "../../../data/productData.json";
-import CheckoutForm from "@/app/checkout/CheckoutForm";
+// import CheckoutForm from "@/app/checkout/CheckoutForm";
 import Link from "next/link";
 
 const stripePromise = loadStripe(
