@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Successful</title>
+    <style>
+        /* Mobile adjustments */
+        @media only screen and (max-width: 600px) {
+            .container {
+                width: 100% !important;
+                padding: 15px !important;
+            }
+
+            .btn {
+                display: block !important;
+                width: 100% !important;
+                margin-bottom: 10px !important;
+            }
+        }
+    </style>
+</head>
+
+<body style="margin:0; padding:0; font-family:Arial, sans-serif; color:#fafafa;">
+
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center">
+
+                <!-- Main Container -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" class="container"
+                    style="max-width:600px; width:100%; background:#0a0a0a; border:1px solid #262626;">
+
+                    <!-- Header -->
+                    <tr>
+                        <td style="padding:15px; border-bottom:1px solid #262626;" align="left">
+                            <table width="100%">
+                                <tr>
+                                    <td align="left" valign="middle">
+                                        <img src="https://my-dprivate.s3.ap-south-1.amazonaws.com/avatar/Beyond-bikes.png"
+                                            width="40" height="40" style="vertical-align:middle;">
+                                        <span style="font-weight:bold; color:#fafafa; margin-left:8px;">Beyond
+                                            Bikes</span>
+                                    </td>
+                                    <td align="right" style="color:#999; font-size:12px;">
+                                        Transaction #{{transactionId}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Body -->
+                    <tr>
+                        <td style="padding:20px;" align="center">
+
+                            <!-- Success Icon -->
+                            <div
+                                style="width:64px; height:64px; border-radius:50%; background:#22c55e; color:#fff; font-size:28px; line-height:64px; margin:0 auto;">
+                                ✓
+                            </div>
+
+                            <h1 style="color:#fafafa; font-size:22px; margin:20px 0 10px;">Payment Successful!</h1>
+                            <p style="color:#bbb; font-size:14px;">Hi <b>{{customerName}}</b>, your transaction has been
+                                processed successfully.</p>
+
+                            <!-- Payment Details -->
+                            <table width="100%" cellpadding="8" cellspacing="0"
+                                style="margin:20px 0; background:#1a1a1a; border:1px solid #262626; border-radius:6px;">
+                                <tr>
+                                    <td colspan="2" style="color:#fafafa; font-weight:bold; font-size:16px;">Payment
+                                        Details</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#999;">Amount Paid</td>
+                                    <td align="right" style="color:#fafafa;">{{amount}} {{currency}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#999;">Payment Method</td>
+                                    <td align="right" style="color:#fafafa;">{{paymentMethod}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#999;">Transaction Date</td>
+                                    <td align="right" style="color:#fafafa;">{{transactionDate}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#999;">Status</td>
+                                    <td align="right" style="color:#22c55e;">Completed</td>
+                                </tr>
+                            </table>
+
+                            <!-- Order Summary -->
+                            <table width="100%" cellpadding="8" cellspacing="0"
+                                style="margin-bottom:20px; background:#1a1a1a; border:1px solid #262626; border-radius:6px;">
+                                <tr>
+                                    <td colspan="2" style="color:#fafafa; font-weight:bold; font-size:16px;">Order
+                                        Summary</td>
+                                </tr>
+                                <tr style="color:#fafafa;   ">
+                                    <td><b>E-bikes</b></td>
+                                    <td align="right">{{amount}} {{currency}}</td>
+                                </tr>
+                                <tr style="border-top:1px solid #262626;color:#fafafa; ">
+                                    <td style="color:#fafafa; font-weight:bold;">Total</td>
+                                    <td align="right">{{amount}} {{currency}}</td>
+                                </tr>
+                            </table>
+
+                            <!-- Buttons -->
+                            <table cellpadding="0" cellspacing="0" border="0">
+                                <tr>
+                                    <td>
+                                        <a href="{{dashboardUrl}}" class="btn"
+                                            style="background:#f97316; color:#fff; text-decoration:none; padding:12px 20px; border-radius:6px; font-weight:bold; display:inline-block;">Access
+                                            Dashboard</a>
+                                    </td>
+                                    <td style="width:10px;"></td>
+                                    <td>
+                                        <a href="{{receiptUrl}}" class="btn"
+                                            style="background:#1a1a1a; color:#fafafa; text-decoration:none; padding:12px 20px; border-radius:6px; border:1px solid #262626; font-weight:bold; display:inline-block;">Download
+                                            Receipt</a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="padding:15px; border-top:1px solid #262626; text-align:center;">
+                            <p style="color:#999; font-size:12px; margin:5px 0;">
+                                <a href="{{supportUrl}}" style="color:#999; text-decoration:none;">Support</a> |
+                                <a href="{{privacyUrl}}" style="color:#999; text-decoration:none;">Privacy Policy</a> |
+                                <a href="{{termsUrl}}" style="color:#999; text-decoration:none;">Terms</a>
+                            </p>
+                            <p style="font-size:12px; color:#666; margin:5px 0;">© {{year}} Beyond Bikes. All rights
+                                reserved.</p>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>

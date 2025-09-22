@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Received</title>
+    <style>
+        @media only screen and (max-width:600px) {
+            .container {
+                width: 100% !important;
+            }
+
+            .content {
+                padding: 20px !important;
+            }
+
+            .btn {
+                display: block !important;
+                width: 100% !important;
+                margin-bottom: 10px !important;
+            }
+        }
+    </style>
+</head>
+
+<body style="margin:0; padding:0; background:#f8fafc; font-family:Arial, sans-serif; color:#333;">
+
+    <!-- Main Wrapper -->
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center">
+
+                <!-- Container -->
+                <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" class="container"
+                    style="max-width:600px; width:100%; background:#ffffff; border-radius:8px; overflow:hidden;">
+
+                    <!-- Header -->
+                    <tr>
+                        <td align="center" bgcolor="#15a42d"
+                            style="padding:40px 20px; background:linear-gradient(135deg,#81e08d 0%,#15a42d 100%);">
+                            <img src="https://my-dprivate.s3.ap-south-1.amazonaws.com/avatar/Beyond-bikes.png"
+                                width="120" alt="Beyond Bikes" style="display:block; margin-bottom:15px;">
+                            <h1 style="font-size:24px; font-weight:bold; color:#fff; margin:0;">Payment Received</h1>
+                            <p style="font-size:14px; color:#f0fdf4; margin:5px 0 0;">Thank you for your payment</p>
+                        </td>
+                    </tr>
+
+                    <!-- Success Icon -->
+                    <tr>
+                        <td align="center" style="padding:30px 20px 10px;">
+                            <div
+                                style="width:64px; height:64px; border-radius:50%; background:#10b981; color:#fff; font-size:32px; line-height:64px; text-align:center; margin:0 auto;">
+                                ✓
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- Greeting -->
+                    <tr>
+                        <td style="padding:10px 30px; font-size:16px; color:#374151;">
+                            Hello <strong>Beyond Bikes</strong>,
+                        </td>
+                    </tr>
+
+                    <!-- Message -->
+                    <tr>
+                        <td style="padding:10px 30px 20px; font-size:14px; color:#6b7280; line-height:1.6;">
+                            We’re pleased to confirm that we have successfully received your payment.
+                            Your transaction has been processed and your account has been updated accordingly.
+                        </td>
+                    </tr>
+
+                    <!-- Payment Details -->
+                    <tr>
+                        <td style="padding:0 30px 30px;">
+                            <table width="100%" cellpadding="10" cellspacing="0"
+                                style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px;">
+                                <tr>
+                                    <td colspan="2"
+                                        style="font-size:16px; font-weight:bold; color:#111827; padding:15px;">Payment
+                                        Details</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#6b7280; font-size:14px;">Transaction ID:</td>
+                                    <td align="right" style="color:#111827; font-size:14px;">{{transactionId}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#6b7280; font-size:14px;">Payment Method:</td>
+                                    <td align="right" style="color:#111827; font-size:14px;">{{paymentMethod}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="color:#6b7280; font-size:14px;">Date & Time:</td>
+                                    <td align="right" style="color:#111827; font-size:14px;">{{transactionDate}}</td>
+                                </tr>
+                                <!-- <tr>
+                                    <td style="color:#6b7280; font-size:14px;">Description:</td>
+                                    <td align="right" style="color:#111827; font-size:14px;">{{description}}</td>
+                                </tr> -->
+                                <tr>
+                                    <td style="color:#6b7280; font-size:14px;">Amount Paid:</td>
+                                    <td align="right"
+                                        style="color:#000; font-size:16px; font-weight:bold; padding:6px 12px; border-radius:6px;">
+                                        ${{amount}}</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Action Buttons -->
+                    <tr>
+                        <td align="center" style="padding:20px 30px;">
+                            <a href="{{invoiceUrl}}" class="btn"
+                                style="background:#3b82f6; color:#fff; text-decoration:none; padding:12px 24px; border-radius:6px; font-weight:bold; font-size:14px; display:inline-block; margin-right:10px;">View
+                                Invoice</a>
+                            <a href="{{receiptUrl}}" class="btn"
+                                style="background:#f3f4f6; color:#374151; text-decoration:none; padding:12px 24px; border-radius:6px; font-weight:bold; font-size:14px; border:1px solid #d1d5db; display:inline-block;">Download
+                                Receipt</a>
+                        </td>
+                    </tr>
+
+                    <!-- Extra Note -->
+                    <tr>
+                        <td style="padding:0 30px 30px; font-size:14px; color:#6b7280; line-height:1.6;">
+                            If you have any questions about this payment or need assistance, please don’t hesitate to
+                            contact our support team. We’re here to help!
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td bgcolor="#f9fafb"
+                            style="padding:20px; text-align:center; font-size:12px; color:#6b7280; border-top:1px solid #e5e7eb;">
+                            <p style="margin:5px 0;"><strong>Beyond Bikes</strong></p>
+                            <p style="margin:5px 0;">576 North Rd, Ormond VIC 3204, Australia</p>
+                            <p style="margin:5px 0;">
+                                <a href="{{supportUrl}}" style="color:#3b82f6; text-decoration:none;">Support</a> |
+                                <a href="{{privacyPolicyUrl}}" style="color:#3b82f6; text-decoration:none;">Privacy
+                                    Policy</a> |
+                                <a href="{{termsUrl}}" style="color:#3b82f6; text-decoration:none;">Terms</a>
+                            </p>
+                            <p style="margin-top:10px; color:#9ca3af;">
+                                This email was sent to {{customerEmail}}. If you believe you received this email in
+                                error, please contact us immediately.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+</html>
