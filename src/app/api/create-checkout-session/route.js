@@ -124,17 +124,19 @@
 // }
 
 // src/app/api/create-checkout-session/route.js
+// src/app/api/create-checkout-session/route.js
 import Stripe from "stripe";
 import { NextResponse } from "next/server";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2024-12-18.acacia",
+});
 
 export async function POST(req) {
   try {
     const body = await req.json();
     const { name, email, phone, startDate, endDate, amount } = body;
 
-    // Validation
     if (!name || !email || !amount) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -142,7 +144,8 @@ export async function POST(req) {
       );
     }
 
-    // ✅ Enable automatic payment methods (Google Pay will now show up)
+    console.log("Creating Stripe Checkout session using automatic_payment_methods...");
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       customer_email: email,
@@ -150,28 +153,22 @@ export async function POST(req) {
         {
           price_data: {
             currency: "aud",
-            // country: "AU",
             product_data: {
               name: `E-bike Rental - ${name}`,
-              description: `Rental from ${startDate} to ${endDate}`,
+              description: `Rental from ${startDate || "N/A"} to ${endDate || "N/A"}`,
             },
-            unit_amount: amount * 100,
+            unit_amount: Math.round(amount * 100),
           },
           quantity: 1,
         },
       ],
-      // ✅ This enables Apple Pay, Google Pay, and all relevant wallet methods
-      payment_method_types: ["card"],
-      payment_method_options: {
-        card: {
-          // ✅ This is key for GPay to appear on web
-          request_three_d_secure: "automatic",
-        },
-      },
+      payment_method_types: ["card"]
+, // ✅ No payment_method_types here
+      billing_address_collection: "auto",
       allow_promotion_codes: true,
+      invoice_creation: { enabled: true },
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/checkout?canceled=true`,
-      invoice_creation: { enabled: true },
     });
 
     return NextResponse.json({ id: session.id, url: session.url });
