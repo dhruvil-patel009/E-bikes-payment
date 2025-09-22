@@ -1,43 +1,12 @@
-// // src/api/create-payment-intent/route.js
-// import Stripe from "stripe";
-
-// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-
-// export async function POST(req) {
-//   try {
-//     const { amount, currency = "aud" } = await req.json();
-
-//     if (!amount) {
-//       return new Response(JSON.stringify({ error: "Missing amount" }), {
-//         status: 400,
-//       });
-//     }
-
-//     const paymentIntent = await stripe.paymentIntents.create({
-//       amount,
-//       currency,
-//       automatic_payment_methods: { enabled: true },
-//     });
-
-//     return new Response(
-//       JSON.stringify({ clientSecret: paymentIntent.client_secret }),
-//       { status: 200 }
-//     );
-//   } catch (err) {
-//     console.error("Stripe error:", err);
-//     return new Response(JSON.stringify({ error: err.message }), {
-//       status: 500,
-//     });
-//   }
-// }
-
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 export async function POST(req) {
   try {
-    const { amount, currency } = await req.json();
+    // ✅ Destructure all fields from body
+    const { amount, currency, customerEmail, customerName, rentalStart, rentalEnd } =
+      await req.json();
 
     if (!amount || !currency) {
       return new Response(
@@ -49,7 +18,13 @@ export async function POST(req) {
     const paymentIntent = await stripe.paymentIntents.create({
       amount,
       currency,
-      automatic_payment_methods: { enabled: true }, // <-- enables wallets like GPay/Apple Pay
+      receipt_email: customerEmail || undefined, // ✅ attach email so Stripe can send receipt
+      metadata: {
+        customer_name: customerName || "Guest",
+        rental_start: rentalStart || "", // ✅ fixed (no more ReferenceError)
+        rental_end: rentalEnd || "",
+      },
+      automatic_payment_methods: { enabled: true },
     });
 
     return new Response(

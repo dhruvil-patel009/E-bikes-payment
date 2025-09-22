@@ -563,7 +563,7 @@
 // }
 
 
-
+//src/app/bookrent/page.js
 'use client';
 import Head from 'next/head';
 import '../styles/Payment.css';
@@ -623,20 +623,26 @@ export default function BookRent() {
     validateField(e.target.name, e.target.value);
   };
 
-  const handlePayNow = (e) => {
-    e.preventDefault();
+const handlePayNow = (e) => {
+  e.preventDefault();
 
-    // // quick validation
-    // if (!formData.fullName || !formData.email) {
-    //   alert("Please fill all required fields and enter amount.");
-    //   return;
-    // }
+  if (!formData["Full Name"] || !formData["Email Address"]) {
+    alert("Please fill in your name and email.");
+    return;
+  }
 
-    // Navigate to checkout with query params
-    router.push(
-      `/checkout?productId=rental-ebike&price=${amount}&currency=AUD`
-    );
-  };
+  const startDate = ranges[0].startDate.toISOString();
+  const endDate = ranges[0].endDate.toISOString();
+
+  router.push(
+    `/checkout?productId=rental-ebike&price=${amount}&currency=AUD` +
+      `&email=${encodeURIComponent(formData["Email Address"])}` +
+      `&name=${encodeURIComponent(formData["Full Name"])}` +
+      `&start=${encodeURIComponent(startDate)}` +
+      `&end=${encodeURIComponent(endDate)}`
+  );
+};
+
 
   return (
     <>
