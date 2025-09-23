@@ -548,7 +548,7 @@
 //                         {loading ? "Processing..." : "Pay Now"}
 //                       </button>
 //                     </div>
-                    
+
 //                   </form>
 //                 </div>
 //               </div>
@@ -562,13 +562,12 @@
 //   );
 // }
 
-
 //src/app/bookrent/page.js
-'use client';
-import Head from 'next/head';
-import '../styles/Payment.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+"use client";
+import Head from "next/head";
+import "../styles/Payment.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { useState } from "react";
 import { DateRange } from "react-date-range";
 import { useRouter } from "next/navigation";
@@ -600,13 +599,15 @@ export default function BookRent() {
 
     if (name === "Full Name") {
       if (!value.trim()) message = "Full name is required.";
-      else if (value.length < 3) message = "Name must be at least 3 characters.";
+      else if (value.length < 3)
+        message = "Name must be at least 3 characters.";
     }
 
     if (name === "Email Address") {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!value.trim()) message = "Email is required.";
-      else if (!emailRegex.test(value)) message = "Enter a valid email address.";
+      else if (!emailRegex.test(value))
+        message = "Enter a valid email address.";
     }
 
     if (name === "Phone Number") {
@@ -623,33 +624,39 @@ export default function BookRent() {
     validateField(e.target.name, e.target.value);
   };
 
-const handlePayNow = (e) => {
-  e.preventDefault();
+  const handlePayNow = (e) => {
+    e.preventDefault();
 
-  if (!formData["Full Name"] || !formData["Email Address"]) {
-    alert("Please fill in your name and email.");
-    return;
-  }
+    if (!formData["Full Name"] || !formData["Email Address"]) {
+      alert("Please fill in your name and email.");
+      return;
+    }
 
-  const startDate = ranges[0].startDate.toISOString();
-  const endDate = ranges[0].endDate.toISOString();
+    // ✅ Clear localStorage flags for a fresh checkout
+    localStorage.removeItem("checkoutActive");
+    localStorage.removeItem("checkoutUsed");
 
-  router.push(
-    `/checkout?productId=rental-ebike&price=${amount}&currency=AUD` +
-      `&email=${encodeURIComponent(formData["Email Address"])}` +
-      `&name=${encodeURIComponent(formData["Full Name"])}` +
-      `&start=${encodeURIComponent(startDate)}` +
-      `&end=${encodeURIComponent(endDate)}`
-  );
-};
+    const startDate = ranges[0].startDate.toISOString();
+    const endDate = ranges[0].endDate.toISOString();
 
+    router.push(
+      `/checkout?productId=rental-ebike&price=${amount}&currency=AUD` +
+        `&email=${encodeURIComponent(formData["Email Address"])}` +
+        `&name=${encodeURIComponent(formData["Full Name"])}` +
+        `&start=${encodeURIComponent(startDate)}` +
+        `&end=${encodeURIComponent(endDate)}`
+    );
+  };
 
   return (
     <>
       <Head>
         {/* Meta Tags */}
         <title>Book Rental E-bike | Beyond Bikes</title>
-        <meta name="description" content="Book your rental e-bike and pay online securely." />
+        <meta
+          name="description"
+          content="Book your rental e-bike and pay online securely."
+        />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`${siteUrl}/bookrent`} />
       </Head>
@@ -657,19 +664,27 @@ const handlePayNow = (e) => {
       <Header />
 
       <main>
-        <section className="py-5" style={{ backgroundColor: "#f8f9fa" }} id="how-to-rent">
+        <section
+          className="py-5"
+          style={{ backgroundColor: "#f8f9fa" }}
+          id="how-to-rent"
+        >
           <div className="container text-center">
             <h1 className="fw-bold text-dark mb-2 text-balance">
               Book Rental E-bike
             </h1>
-            <p className='text-secondary' style={{ fontSize: '16px' }}>
+            <p className="text-secondary" style={{ fontSize: "16px" }}>
               Complete the form and proceed to secure checkout.
             </p>
           </div>
 
           <section className="container px-sm-0 px-3 py-3">
             <div className="row g-4 d-flex justify-content-center">
-              <div className="col-lg-6" itemScope itemType="https://schema.org/ContactPage">
+              <div
+                className="col-lg-6"
+                itemScope
+                itemType="https://schema.org/ContactPage"
+              >
                 <div className="interactive-card p-4">
                   <form className="contact-form" onSubmit={handlePayNow}>
                     <div className="row g-3 mb-3">
@@ -678,7 +693,9 @@ const handlePayNow = (e) => {
                           <input
                             type="text"
                             id="name"
-                            className={`form-control ${errors["Full Name"] ? "is-invalid" : ""}`}
+                            className={`form-control ${
+                              errors["Full Name"] ? "is-invalid" : ""
+                            }`}
                             placeholder="Your Name"
                             name="Full Name"
                             required
@@ -687,7 +704,9 @@ const handlePayNow = (e) => {
                           />
                           <label htmlFor="name">Full Name</label>
                           {errors["Full Name"] && (
-                            <div className="invalid-feedback">{errors["Full Name"]}</div>
+                            <div className="invalid-feedback">
+                              {errors["Full Name"]}
+                            </div>
                           )}
                         </div>
                       </div>
@@ -697,7 +716,9 @@ const handlePayNow = (e) => {
                           <input
                             type="email"
                             id="email"
-                            className={`form-control form-control-lg ${errors["Email Address"] ? "is-invalid" : ""}`}
+                            className={`form-control form-control-lg ${
+                              errors["Email Address"] ? "is-invalid" : ""
+                            }`}
                             placeholder="Your Email"
                             name="Email Address"
                             required
@@ -706,7 +727,9 @@ const handlePayNow = (e) => {
                           />
                           <label htmlFor="email">Email Address</label>
                           {errors["Email Address"] && (
-                            <div className="invalid-feedback">{errors["Email Address"]}</div>
+                            <div className="invalid-feedback">
+                              {errors["Email Address"]}
+                            </div>
                           )}
                         </div>
                       </div>
@@ -717,14 +740,18 @@ const handlePayNow = (e) => {
                         <input
                           type="text"
                           id="phone"
-                          className={`form-control form-control-lg ${errors["Phone Number"] ? "is-invalid" : ""}`}
+                          className={`form-control form-control-lg ${
+                            errors["Phone Number"] ? "is-invalid" : ""
+                          }`}
                           placeholder="Your Phone Number"
                           name="Phone Number"
                           onChange={handleChange}
                         />
                         <label htmlFor="phone">Phone Number</label>
                         {errors["Phone Number"] && (
-                          <div className="invalid-feedback">{errors["Phone Number"]}</div>
+                          <div className="invalid-feedback">
+                            {errors["Phone Number"]}
+                          </div>
                         )}
                       </div>
                     </div>

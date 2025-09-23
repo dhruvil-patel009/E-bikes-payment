@@ -258,7 +258,26 @@ export default function CheckoutForm({
         setCanMakePayment(true);
       }
     });
-  }, [stripe, amount, currency, product]);
+
+    // Listen for payment method submission
+    pr.on("paymentmethod", async (ev) => {
+      // Confirm the PaymentIntent using clientSecret
+      const { error: confirmError, paymentIntent } =
+        await stripe.confirmCardPayment(
+          clientSecret,
+          { payment_method: ev.paymentMethod.id },
+          { handleActions: true }
+        );
+
+      if (confirmError) {
+        ev.complete("fail");
+        setError(confirmError.message);
+      } else {
+        ev.complete("success");
+        window.location.href = `/checkout-success?payment_intent=${paymentIntent.id}`;
+      }
+    });
+  }, [stripe, amount, currency, product, clientSecret]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

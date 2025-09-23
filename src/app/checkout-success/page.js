@@ -9,6 +9,9 @@ export default function CheckoutSuccessPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    localStorage.setItem("checkoutUsed", "true");
+    localStorage.removeItem("checkoutActive");
+
     async function fetchPaymentDetails() {
       const params = new URLSearchParams(window.location.search);
       const paymentIntentId = params.get("payment_intent");
