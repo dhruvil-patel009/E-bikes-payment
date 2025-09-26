@@ -16,7 +16,7 @@ export async function GET(req) {
 
   try {
     const paymentIntent = await stripe.paymentIntents.retrieve(pi, {
-      expand: ["charges.data.payment_method_details"],
+  expand: ["charges", "charges.data.payment_method_details", "invoice"],
     });
 
     return NextResponse.json({ paymentIntent }, { status: 200 });
