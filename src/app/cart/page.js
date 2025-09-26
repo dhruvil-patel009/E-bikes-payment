@@ -6,6 +6,7 @@ import Image from 'next/image';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Link from 'next/link';
 
 const cartItemsData = [
   {
@@ -104,9 +105,9 @@ export default function ShoppingCart() {
                 </div>
               </div>
             ))}
-            <a href="/products" className="text-decoration-none mt-4 d-inline-block">
+            <Link href="/products" className="text-decoration-none mt-4 d-inline-block">
               <i className="bi bi-arrow-left"></i> Continue Shopping
-            </a>
+            </Link>
           </div>
 
           <div className="col-lg-4">
