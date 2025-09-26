@@ -284,7 +284,7 @@ export default function CheckoutPageClient() {
     className="checkout-product-img me-3"
   />
   <div>
-    <h6 className="fw-bold mb-1">Premium Mountain Bike</h6>
+    <h6 className="fw-bold mb-1">E-Bike</h6>
     <p className="text-muted small mb-1">
       Rental Period: 3 days (Jun 15 - Jun 18)
     </p>
@@ -292,14 +292,15 @@ export default function CheckoutPageClient() {
   </div>
 </div>
 
-    <p><span>Subtotal</span><span>AUD 110.00</span></p>
-    <p><span>Tax</span><span>AUD 10.00</span></p>
-    <p className="checkout-total"><span>Total</span><span>AUD 120.00</span></p>
+   <p><span>Subtotal</span><span> {currency.toUpperCase()} {price}</span></p>
+    <p><span>Tax</span><span> {currency.toUpperCase()} {price}</span></p>
+    <p className="checkout-total"><span>Total</span><span> {currency.toUpperCase()} {price}</span></p>
     {/* Receipt */}
   <div className="alert alert-light d-flex align-items-center mt-3" role="alert">
     <i className="bi bi-envelope me-2"></i>
-    Your receipt will be sent to: <strong className="ms-1">john.doe@example.com</strong>
+    Your receipt will be sent to: <strong className="ms-1">{email}</strong>
   </div>
+
 
   <div className="checkout-footer mt-4">
     <span><i className="bi bi-shield-lock-fill"></i> Secure Payment</span>

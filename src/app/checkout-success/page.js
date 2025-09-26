@@ -239,7 +239,7 @@ export default function CheckoutSuccessPage() {
               ? `${charge.payment_method_details.card.brand.toUpperCase()} **** ${charge.payment_method_details.card.last4}`
               : pi.payment_method_types?.[0]?.toUpperCase() || "Unknown",
             email: pi.receipt_email || "N/A",
-  invoicePdfUrl: charge?.receipt_url || "#", // ✅ Use only the charge's receipt_url
+            invoicePdfUrl: charge?.receipt_url || "#", // ✅ Use only the charge's receipt_url
           });
         }
       } catch (err) {
