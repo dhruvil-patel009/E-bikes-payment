@@ -217,7 +217,7 @@
 /* Icon style */
 #why-choose i {
   transition: transform 0.3s ease, color 0.3s ease;
-  color: #1A3B19 !important;
+  color: #fff !important;
 }
 
 /* Title + text */
@@ -239,7 +239,7 @@
 
 #why-choose .row > div > div:hover i {
   transform: scale(1.15);
-  color: #2f6d2c !important; /* darker green */
+  color: #fff !important; /* darker green */
 }
 
 #why-choose .row > div > div:hover h3 {
@@ -250,33 +250,34 @@
   color: #333333 !important;
 }
 
-.animated-underline {
+.heading-underline {
   position: relative;
-  display: inline-block;
-  padding-bottom: 8px; /* space for the underline */
+  
 }
 
-.animated-underline::after {
+.heading-underline::after {
   content: "";
   position: absolute;
-  bottom: 0;
   left: 50%;
+  bottom: -10px;         /* distance below text */
+  width: 90px;          /* fixed small underline */
   height: 3px;
-  width: 0;
-  background-color: #1a3b19;
-  border-radius: 2px;
-  transform: translateX(-50%);
-  animation: underlineExpand 2s infinite;
+  background-color: #1A3B19;
+  transform: translateX(-50%); /* keeps it centered */
+  border-radius: 2px;   /* optional rounded edges */
 }
 
-@keyframes underlineExpand {
-  0% {
-    width: 0;
-  }
-  50% {
-    width: 100%;
-  }
-  100% {
-    width: 0;
-  }
+.icon-circle {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;        /* makes it a circle */
+  background-color: #1A3B19; /* dark green background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle i {
+  font-size: 28px;
+  color: #fff !important; /* white icon */
 }

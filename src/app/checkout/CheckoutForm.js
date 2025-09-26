@@ -215,7 +215,123 @@
 //   );
 // }
 
+
+// 24 September 
 // src/app/components/CheckoutForm.jsx
+// "use client";
+// import React, { useEffect, useState } from "react";
+// import {
+//   PaymentElement,
+//   useStripe,
+//   useElements,
+//   PaymentRequestButtonElement,
+// } from "@stripe/react-stripe-js";
+
+// export default function CheckoutForm({
+//   clientSecret,
+//   amount,
+//   currency,
+//   product,
+// }) {
+//   const stripe = useStripe();
+//   const elements = useElements();
+//   const [paymentRequest, setPaymentRequest] = useState(null);
+//   const [canMakePayment, setCanMakePayment] = useState(false);
+//   const [loading, setLoading] = useState(false);
+//   const [error, setError] = useState("");
+
+//   useEffect(() => {
+//     if (!stripe) return;
+
+//     const pr = stripe.paymentRequest({
+//       country: "AU",
+//       currency: currency.toLowerCase(),
+//       total: {
+//         label: product.title,
+//         amount: amount,
+//       },
+//       requestPayerName: true,
+//       requestPayerEmail: true,
+//     });
+
+//     pr.canMakePayment().then((result) => {
+//       if (result) {
+//         setPaymentRequest(pr);
+//         setCanMakePayment(true);
+//       }
+//     });
+
+//     // Listen for payment method submission
+//     pr.on("paymentmethod", async (ev) => {
+//       // Confirm the PaymentIntent using clientSecret
+//       const { error: confirmError, paymentIntent } =
+//         await stripe.confirmCardPayment(
+//           clientSecret,
+//           { payment_method: ev.paymentMethod.id },
+//           { handleActions: true }
+//         );
+
+//       if (confirmError) {
+//         ev.complete("fail");
+//         setError(confirmError.message);
+//       } else {
+//         ev.complete("success");
+//         window.location.href = `/checkout-success?payment_intent=${paymentIntent.id}`;
+//       }
+//     });
+//   }, [stripe, amount, currency, product, clientSecret]);
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     if (!stripe || !elements) return;
+
+//     setLoading(true);
+//     const { error } = await stripe.confirmPayment({
+//       elements,
+//       confirmParams: {
+//         return_url: `${window.location.origin}/checkout-success`,
+//       },
+//     });
+
+//     if (error) {
+//       setError(error.message);
+//     }
+//     setLoading(false);
+//   };
+
+//   return (
+//     <div>
+//       {canMakePayment && paymentRequest ? (
+//         <div className="mb-4">
+//           <PaymentRequestButtonElement
+//             options={{ paymentRequest }}
+//             className="w-100"
+//           />
+//           <div className="text-center my-2">or pay with card</div>
+//         </div>
+//       ) : (
+//         <div className="text-center mb-2">Pay with card</div>
+//       )}
+
+//       <form onSubmit={handleSubmit}>
+//         <PaymentElement />
+//         <button
+//           type="submit"
+//           disabled={!stripe || loading}
+//           className="btn btn-primary w-100 mt-3"
+//         >
+//           {loading
+//             ? "Processing..."
+//             : `Pay ${currency.toUpperCase()} ${amount / 100}`}
+//         </button>
+//       </form>
+
+//       {error && <div className="text-danger mt-2">{error}</div>}
+//     </div>
+//   );
+// }
+
+
 "use client";
 import React, { useEffect, useState } from "react";
 import {
@@ -316,7 +432,7 @@ export default function CheckoutForm({
         <button
           type="submit"
           disabled={!stripe || loading}
-          className="btn btn-primary w-100 mt-3"
+          className="rent-now-payment w-100 mt-3"
         >
           {loading
             ? "Processing..."

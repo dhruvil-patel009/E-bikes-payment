@@ -176,3 +176,35 @@
                          50% 0, 0 0, 50% 50%;
   }
 }
+
+/* More noticeable slide-in */
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-120px) scale(0.95);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(15px) scale(1.02); /* overshoot */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Base style before animation */
+.list-group-item {
+  opacity: 0;
+  transform: translateX(-120px);
+  animation: slideInLeft 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: calc(var(--i) * 0.8s); /* more gap between items */
+}
+
+/* Assign index for stagger effect */
+.list-group-item:nth-child(1) { --i: 1; }
+.list-group-item:nth-child(2) { --i: 2; }
+.list-group-item:nth-child(3) { --i: 3; }
+.list-group-item:nth-child(4) { --i: 4; }
+.list-group-item:nth-child(5) { --i: 5; }
+.list-group-item:nth-child(6) { --i: 6; }

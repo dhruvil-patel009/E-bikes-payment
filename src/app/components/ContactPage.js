@@ -164,13 +164,13 @@ export default function ContactPage() {
       {/* Contact Section */}
       <section className='scroll-animate'>
         <div
-          className="container py-sm-5 mt-4 py-1 px-3 text-white"
+          className="container mt-2 py-1 px-3 text-white"
           aria-label="Store Locations"
         >
           <div className="row justify-content-center mb-sm-5 mb-3">
 
-            <h2 className="text-center fw-600 fs-1" style={{ color: '#1A3B19' }}>
-              Contact Beyond Bikes in Melbourne
+            <h2 className="text-center fw-600 fs-1 heading-underline mb-3" style={{ color: '#1A3B19' }}>
+              Contact Beyond Bikes
             </h2>
             {/* <p>Contact Us on this Located Destination and</p> */}
           </div>

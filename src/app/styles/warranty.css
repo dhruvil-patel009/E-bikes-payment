@@ -10,3 +10,13 @@
   padding: 2px 4px;
   border-radius: 4px;
 }
+
+.step-connector {
+  flex-grow: 1;
+  height: 4px;
+  background-color: #1a3b19;
+}
+
+.stepper-item {
+  flex: 1;
+}

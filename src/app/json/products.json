@@ -30,7 +30,42 @@
       "battery": "48V 80A",
       "batteryHours": "10-12 hours",
       "topSpeed": "45 MPH"
+    },
+
+     {
+      "id": 4,
+      "name": "White E-bike",
+      "image": "/images/White-E-bike-Product.png",
+      "price": "$70.00 AUD",
+      "oldPrice": "$80.00 AUD",
+      "battery": "48V 80A",
+      "batteryHours": "10-12 hours",
+      "topSpeed": "45 MPH"
+    },
+
+    {
+      "id": 5,
+      "name": "Black E-bike",
+      "image": "/images/Latest-Black-Cycle-Product.png",
+      "price": "$70.00 AUD",
+      "oldPrice": "$80.00 AUD",
+      "battery": "48V 80A",
+      "batteryHours": "10-12 hours",
+      "topSpeed": "45 MPH"
+    },
+
+    {
+      "id": 6,
+      "name": "Red E-bike",
+      "image": "/images/24-09-Red-Cycle-Product-Latest.png",
+      "price": "$70.00 AUD",
+      "oldPrice": "$80.00 AUD",
+      "battery": "48V 80A",
+      "batteryHours": "10-12 hours",
+      "topSpeed": "45 MPH"
     }
+
+    
     
     
   ],

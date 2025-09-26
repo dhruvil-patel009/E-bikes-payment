@@ -28,7 +28,7 @@ export default function TermAndCondition() {
       {/* Header Section */}
       <header className="py-5 text-center position-relative" style={{
   height: '40vh',
- backgroundImage: "url('/images/Terms-condition-background.jpg')", // 👉 Place your image in /public/images/
+ backgroundImage: "url('/images/Latest-termsandcondition.jpg')", // 👉 Place your image in /public/images/
     backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
