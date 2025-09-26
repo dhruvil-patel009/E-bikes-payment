@@ -69,3 +69,33 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+.heading-underline-customer {
+  position: relative;
+  
+}
+
+.heading-underline-customer::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 30px;         /* distance below text */
+  width: 90px;          /* fixed small underline */
+  height: 3px;
+  background-color: #1A3B19;
+  transform: translateX(-50%); /* keeps it centered */
+  border-radius: 2px;   /* optional rounded edges */
+}
+
+
+.review-track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  cursor: grab;
+}
+
+.review-track.active {
+  cursor: grabbing;
+}

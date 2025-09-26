@@ -1,5 +1,4 @@
-/* src/styles/checkout.css */
-.checkout-page {
+/* .checkout-page {
     display: flex;
     gap: 24px;
     padding: 24px;
@@ -161,4 +160,188 @@
 .error {
     color: red;
     font-size: 0.9rem;
+}
+
+ */
+
+ /* =========================
+   Checkout Page Styles
+   ========================= */
+
+.checkout-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Timer */
+.checkout-timer {
+  background: #fff5f5;
+  border: 1px solid #f8d7da;
+  color: #dc3545;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+}
+
+/* Product Info */
+.checkout-product-info {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1.5rem;
+}
+
+.checkout-product-info h5 {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.checkout-product-info p {
+  margin: 0.2rem 0;
+}
+
+/* Payment Card (Stripe area) */
+.payment-card {
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: #fafafa;
+}
+
+/* Summary */
+.checkout-summary {
+  margin-top: 1.5rem;
+}
+
+.checkout-summary p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.checkout-total {
+  font-size: 1.2rem !important;
+  font-weight: bold !important;
+  color: #1A3B19 !important;
+  margin-top: 0.8rem;
+}
+
+/* Receipt Box */
+.alert-light {
+  background: #f8f9fa !important;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+}
+
+/* Footer Icons */
+.checkout-footer {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  font-size: 0.9rem;
+  color: #6c757d;
+  text-align: center;
+  gap: 1rem;
+}
+
+.checkout-footer i {
+  margin-right: 6px;
+  color: #28a745;
+  font-size: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+  .checkout-page {
+    padding: 1.25rem;
+  }
+
+  .checkout-summary p {
+    font-size: 0.85rem;
+  }
+
+  .checkout-total {
+    font-size: 1rem !important;
+  }
+
+  .checkout-footer {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* CHANGED: make both summary & payment look like cards */
+.checkout-summary.card,
+.payment-card.card {
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+/* NEW: equal height columns */
+.row > .col-md-6 {
+  display: flex;
+}
+.row > .col-md-6 > .card {
+  flex: 1;
+}
+
+/* Timer full-width box */
+.checkout-timer-box {
+  background: #ffe5e5;
+  border: 1px solid #f5c2c7;
+  color: #dc3545;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+/* Product section with image + text */
+.checkout-product-info {
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1rem;
+}
+
+.checkout-product-img {
+  width: 70px;
+  height: auto;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.rent-now-payment {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: linear-gradient(135deg, #1A3B19, #2F5A2C);
+  padding: 8px 22px;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+@keyframes shine {
+  100% {
+    left: 125%;
+  }
 }

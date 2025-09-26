@@ -13,6 +13,7 @@
 // import Google from '../../../public/images/google-latest.svg';
 // import Call from '../../../public/images/phone-latest.svg';
 
+
 // const images = {
 //   front: '/images/CartoonCycleProductdetailsFrontBlur.jpg',
 //   back: '/images/CartoonCycleProductdetailsBackBlur.jpg',
@@ -56,6 +57,7 @@
 //   const handleClose = () => {
 //     setShowModal(false);
 //   };
+
 
 //   useEffect(() => {
 //     // Ensures Bootstrap's JS is loaded once
@@ -165,6 +167,7 @@
 //   </ul>
 // </div>
 
+
 //             {/* <div className="p-3 rounded mt-3">
 //               <label className="fw-semibold">Color: <span className="text-capitalize">{selectedColor}</span></label>
 //               <div className="d-flex gap-3 mt-2">
@@ -197,15 +200,15 @@
 //     <option value="29in">29 inch</option>
 //   </select>
 // </div> */}
-// {/*
+// {/* 
 //             <div className="mt-4 d-flex align-items-center gap-3">
-
+              
 //               <button
 //     className="btn px-3"
 //     style={{border:'1px solid #f7931e',color:'#f7931e'}}
 //     onClick={() => setQuantity(prev => prev + 1)}
 //   >
-
+    
 //     +
 //   </button>
 
@@ -218,7 +221,7 @@
 //     style={{border:'1px solid #f7931e',color:'#f7931e'}}
 //     onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
 //   >
-
+    
 //     -
 //   </button>
 //               <button className="btn" style={{background:'#f7931e'}}><i className="bi bi-cart text-light me-2" aria-label="cart" onClick={handleAddToCart}></i><span className='text-light'>Add to cart</span></button>
@@ -228,9 +231,9 @@
 //               <span className="badge rounded-pill border border-dark text-dark">Urban</span>
 //             </div> */}
 //             {/* <button className="btn" style={{background:'#f7931e'}} onClick={() =>router.push('/rental')}><i className="bi bi-cart text-light me-2" aria-label="cart" ></i><span className='text-light'>Rental</span></button> */}
-//             <button
-//         className="btn"
-//         style={{ background: '#f7931e' }}
+//             <button 
+//         className="btn" 
+//         style={{ background: '#f7931e' }} 
 //         onClick={handleClick}
 //       >
 //         {/* <i className="bi bi-bike text-light me-2" aria-label="bike"></i> */}
@@ -316,7 +319,7 @@
 
 //         {/* <h2 className="fw-bold display-5">Conquer the city streets or <br /><span className="text-secondary">the mountain trails</span></h2>
 //         <p className="mt-3 fs-5 text-muted px-2 px-md-5">
-//          The MK220 new generation 20 Cargo E-Bike comes with our Battery Efficiency Saving (BES) technology.  This new BES technology give riders 20% more of their trips distance and 10% more of the gradeability and 10% less of its weight than our old generation .
+//          The MK220 new generation 20 Cargo E-Bike comes with our Battery Efficiency Saving (BES) technology.  This new BES technology give riders 20% more of their trips distance and 10% more of the gradeability and 10% less of its weight than our old generation .  
 //          </p> */}
 //         <div className="description-section">
 //   {/* <h1 className="section-title">Description</h1> */}
@@ -392,112 +395,88 @@
 //   );
 // }
 
-"use client";
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
-import "../styles/productdetails.css";
-import Header from "../components/Header";
-import { useRouter } from "next/navigation";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import Footer from "../components/Footer";
-import Instagram from "../../../public/images/instagram-latest.svg";
-import Google from "../../../public/images/google-latest.svg";
-import Call from "../../../public/images/phone-latest.svg";
+'use client';
+import { useEffect, useState } from 'react';
+import Head from 'next/head';
+import Image from 'next/image';
+import '../styles/productdetails.css';
+import Header from '../components/Header';
+import { useRouter } from 'next/navigation';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import Footer from '../components/Footer';
+import Instagram from '../../../public/images/instagram-latest.svg';
+import Google from '../../../public/images/google-latest.svg';
+import Call from '../../../public/images/phone-latest.svg';
 
 const images = {
-  front: "/images/CartoonCycleProductdetailsFrontBlur.jpg",
-  back: "/images/CartoonCycleProductdetailsBackBlur.jpg",
-  middle: "/images/CartoonCycleProductdetailsAngleBlur.jpg",
-  battery: "/images/CartoonCycleProductdetailsWholeBlur.jpg",
+  front: '/images/CartoonCycleProductdetailsFrontBlur.jpg',
+  back: '/images/CartoonCycleProductdetailsBackBlur.jpg',
+  middle: '/images/CartoonCycleProductdetailsAngleBlur.jpg',
+  battery:'/images/CartoonCycleProductdetailsWholeBlur.jpg'
 };
 
 export default function CartoonDetailsPage() {
-  const [selectedColor, setSelectedColor] = useState("front");
+  const [selectedColor, setSelectedColor] = useState('front');
   const [quantity, setQuantity] = useState(1);
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
 
-  const handlePayNow = () => {
-    // Redirect to checkout page with query params for currency & price
-    router.push("/checkout?currency=aud&price=65");
-  };
   const handleClick = () => setShowModal(true);
   const handleClose = () => setShowModal(false);
 
   const [openItem, setOpenItem] = useState(null);
   const [activeTab, setActiveTab] = useState("features");
 
+
   const toggleItem = (item) => {
     setOpenItem(openItem === item ? null : item);
   };
 
+
   useEffect(() => {
-    import("bootstrap/dist/js/bootstrap.bundle.min.js");
+    import('bootstrap/dist/js/bootstrap.bundle.min.js');
   }, []);
 
   return (
     <>
       <Head>
         <title>E-bikes-6-8h Bikes | Beyond Bikes Electric Bike</title>
-        <meta
-          name="description"
-          content="Explore the Cartoon Bikes E-bike 6-8h by Beyond Bikes. Learn specifications, rental info, insurance, and battery details. Book your ride now!"
-        />
-        <meta
-          name="keywords"
-          content="Beyond Bikes, Cartoon Bikes, electric bike, e-bike, rental, battery life, mid-drive, all-terrain"
-        />
+        <meta name="description" content="Explore the Cartoon Bikes E-bike 6-8h by Beyond Bikes. Learn specifications, rental info, insurance, and battery details. Book your ride now!" />
+        <meta name="keywords" content="Beyond Bikes, Cartoon Bikes, electric bike, e-bike, rental, battery life, mid-drive, all-terrain" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="canonical" href="https://yourdomain.com/product/cartoon" />
 
         {/* Open Graph / Social Sharing */}
-        <meta
-          property="og:title"
-          content="Cartoon Bikes | Beyond Bikes Electric Bike"
-        />
-        <meta
-          property="og:description"
-          content="Explore the Cartoon Bikes E-bike 6-8h by Beyond Bikes. Learn specifications, rental info, insurance, and battery details. Book your ride now!"
-        />
+        <meta property="og:title" content="Cartoon Bikes | Beyond Bikes Electric Bike" />
+        <meta property="og:description" content="Explore the Cartoon Bikes E-bike 6-8h by Beyond Bikes. Learn specifications, rental info, insurance, and battery details. Book your ride now!" />
         <meta property="og:type" content="product" />
-        <meta
-          property="og:url"
-          content="https://yourdomain.com/product/cartoon"
-        />
-        <meta
-          property="og:image"
-          content="https://yourdomain.com/images/CartoonCycleProductdetailsFrontBlur.jpg"
-        />
+        <meta property="og:url" content="https://yourdomain.com/product/cartoon" />
+        <meta property="og:image" content="https://yourdomain.com/images/CartoonCycleProductdetailsFrontBlur.jpg" />
       </Head>
 
       <Header />
 
-      <main
-        className="container py-5"
-        itemScope
-        itemType="https://schema.org/Product"
-      >
+      <main className="container py-5" itemScope itemType="https://schema.org/Product">
         <div className="row align-items-start">
           {/* Left Image Section */}
           <div className="col-xl-7 mb-4 only-mobile-center">
-            <Image
-              src={images[selectedColor]}
-              alt={`Cartoon Bikes E-bike view: ${selectedColor}`}
-              width={600}
-              height={600}
-              className="set-image-bikes"
+            <Image 
+              src={images[selectedColor]} 
+              alt={`Cartoon Bikes E-bike view: ${selectedColor}`} 
+              width={600} 
+              height={600} 
+              className='set-image-bikes'
               itemProp="image"
             />
 
             <div className="d-sm-flex thumbnail-gallery mt-3">
-              {Object.keys(images).map((color) => (
+              {Object.keys(images).map(color => (
                 <img
                   key={color}
                   src={images[color]}
                   alt={`Cartoon Bikes ${color} view`}
-                  className={`thumb ${selectedColor === color ? "active" : ""}`}
+                  className={`thumb ${selectedColor === color ? 'active' : ''}`}
                   onClick={() => setSelectedColor(color)}
                 />
               ))}
@@ -506,65 +485,58 @@ export default function CartoonDetailsPage() {
 
           {/* Right Info Section */}
           <div className="col-xl-5">
-            <h1 className="text-center fw-bold" itemProp="name">
-              E-bike 6-8h
-            </h1>
-            <p
-              className="fs-4 text-center fw-bold"
-              itemProp="offers"
-              itemScope
-              itemType="https://schema.org/Offer"
-            >
-              PRICE : $60 AUD{" "}
-              <del className="text-muted fs-4 ms-2">$70 AUD</del>
+            <h1 className="text-center fw-bold" itemProp="name">E-bike 6-8h</h1>
+            <p className="fs-4 text-center fw-bold" itemProp="offers" itemScope itemType="https://schema.org/Offer">
+              PRICE : $60 AUD <del className="text-muted fs-4 ms-2">$70 AUD</del>
               <meta itemProp="price" content="60" />
               <meta itemProp="priceCurrency" content="AUD" />
               <link itemProp="availability" href="https://schema.org/InStock" />
             </p>
+            
+          <section className="container my-4">
+        <div className="row g-3">
+  <div className="col-6">
+    <div className="spec-box">
+      <i className="bi bi-battery-full"></i>
+      <div>
+        <strong>6-8 hours</strong>
+        <p>Battery Hours</p>
+      </div>
+    </div>
+  </div>
 
-            <section className="container my-4">
-              <div className="row g-3">
-                <div className="col-6">
-                  <div className="spec-box">
-                    <i className="bi bi-battery-full"></i>
-                    <div>
-                      <strong>6-8 hours</strong>
-                      <p>Battery Hours</p>
-                    </div>
-                  </div>
-                </div>
+  <div className="col-6">
+    <div className="spec-box">
+      <i className="bi bi-lightning-charge"></i>
+      <div>
+        <strong>500W</strong>
+        <p>Motor</p>
+      </div>
+    </div>
+  </div>
 
-                <div className="col-6">
-                  <div className="spec-box">
-                    <i className="bi bi-lightning-charge"></i>
-                    <div>
-                      <strong>500W</strong>
-                      <p>Motor</p>
-                    </div>
-                  </div>
-                </div>
+  <div className="col-6">
+    <div className="spec-box">
+      <i className="bi bi-clock"></i>
+      <div>
+        <strong>48V 50A</strong>
+        <p>Battery Life</p>
+      </div>
+    </div>
+  </div>
 
-                <div className="col-6">
-                  <div className="spec-box">
-                    <i className="bi bi-clock"></i>
-                    <div>
-                      <strong>48V 50A</strong>
-                      <p>Battery Life</p>
-                    </div>
-                  </div>
-                </div>
+  <div className="col-6">
+    <div className="spec-box">
+      <i className="bi bi-wrench"></i>
+      <div>
+        <strong>Included</strong>
+        <p>Maintenance</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-                <div className="col-6">
-                  <div className="spec-box">
-                    <i className="bi bi-wrench"></i>
-                    <div>
-                      <strong>Included</strong>
-                      <p>Maintenance</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+      </section>
 
             {/* <section class="mt-3" itemProp="description">
   <h2 class="fw-bold text-orange mb-3">Specifications</h2>
@@ -694,360 +666,248 @@ export default function CartoonDetailsPage() {
   </div>
 </section> */}
 
-            <section
-              className="mt-3"
-              itemScope
-              itemType="https://schema.org/Product"
+<section className="mt-3" itemScope itemType="https://schema.org/Product">
+        <h2 className="fw-bold text-orange mb-3">Specifications</h2>
+
+        {/* NAV TABS */}
+        <ul className="nav nav-pills mb-3 bg-light p-1 rounded-pill d-inline-flex">
+          <li className="nav-item">
+            <button
+              className={`nav-link rounded-pill ${activeTab === "performance" ? "active" : ""}`}
+              onClick={() => setActiveTab("performance")}
             >
-              <h2 className="fw-bold text-orange mb-3">Specifications</h2>
+              Performance
+            </button>
+          </li>
+          
+          <li className="nav-item">
+            <button
+              className={`nav-link rounded-pill ${activeTab === "features" ? "active" : ""}`}
+              onClick={() => setActiveTab("features")}
+            >
+              Features
+            </button>
+          </li>
+          <li className="nav-item">
+            <button
+              className={`nav-link rounded-pill ${activeTab === "safety" ? "active" : ""}`}
+              onClick={() => setActiveTab("safety")}
+            >
+              Safety
+            </button>
+          </li>
+        </ul>
 
-              {/* NAV TABS */}
-              <ul className="nav nav-pills mb-3 bg-light p-1 rounded-pill d-inline-flex">
-                <li className="nav-item">
-                  <button
-                    className={`nav-link rounded-pill ${
-                      activeTab === "performance" ? "active" : ""
-                    }`}
-                    onClick={() => setActiveTab("performance")}
-                  >
-                    Performance
-                  </button>
-                </li>
-
-                <li className="nav-item">
-                  <button
-                    className={`nav-link rounded-pill ${
-                      activeTab === "features" ? "active" : ""
-                    }`}
-                    onClick={() => setActiveTab("features")}
-                  >
-                    Features
-                  </button>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className={`nav-link rounded-pill ${
-                      activeTab === "safety" ? "active" : ""
-                    }`}
-                    onClick={() => setActiveTab("safety")}
-                  >
-                    Safety
-                  </button>
-                </li>
-              </ul>
-
-              {/* TAB CONTENT */}
-              <div>
-                {/* Tab 1: Features */}
-                {activeTab === "features" && (
-                  <>
-                    {/* Display */}
-                    <div className="spec-item">
-                      <button
-                        className="spec-toggle"
-                        onClick={() => toggleItem("display")}
-                        aria-expanded={openItem === "display"}
-                      >
-                        <strong>Display</strong>
-                        <span className="toggle-icon">
-                          {openItem === "display" ? "−" : "+"}
-                        </span>
-                      </button>
-                      {openItem === "display" && (
-                        <div className="spec-content">
-                          Multifunctional LED display, clearly visible under
-                          sunlight.
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Lighting */}
-                    <div className="spec-item">
-                      <button
-                        className="spec-toggle"
-                        onClick={() => toggleItem("lighting")}
-                        aria-expanded={openItem === "lighting"}
-                      >
-                        <strong>Lighting</strong>
-                        <span className="toggle-icon">
-                          {openItem === "lighting" ? "−" : "+"}
-                        </span>
-                      </button>
-                      {openItem === "lighting" && (
-                        <div className="spec-content">
-                          <ul>
-                            <li>
-                              Front high-brightness headlight with wide aperture
-                            </li>
-                            <li>
-                              Rear light with laser projection for night safety
-                            </li>
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Phone Holder */}
-                    <div className="spec-item">
-                      <button
-                        className="spec-toggle"
-                        onClick={() => toggleItem("holder")}
-                        aria-expanded={openItem === "holder"}
-                      >
-                        <strong>Phone Holder</strong>
-                        <span className="toggle-icon">
-                          {openItem === "holder" ? "−" : "+"}
-                        </span>
-                      </button>
-                      {openItem === "holder" && (
-                        <div className="spec-content">
-                          USB port (2.1A output)
-                        </div>
-                      )}
-                    </div>
-                  </>
-                )}
-
-                {/* Tab 2: Safety */}
-                {activeTab === "safety" && (
-                  <>
-                    {/* Safety System */}
-                    <div className="spec-item">
-                      <button
-                        className="spec-toggle"
-                        onClick={() => toggleItem("safety")}
-                        aria-expanded={openItem === "safety"}
-                      >
-                        <strong>Safety System</strong>
-                        <span className="toggle-icon">
-                          {openItem === "safety" ? "−" : "+"}
-                        </span>
-                      </button>
-                      {openItem === "safety" && (
-                        <div className="spec-content">
-                          <ul>
-                            <li>
-                              Smart anti-theft remote (alarm + keyless start)
-                            </li>
-                            <li>NFC smart unlock</li>
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Braking System */}
-                    <div className="spec-item">
-                      <button
-                        className="spec-toggle"
-                        onClick={() => toggleItem("brake")}
-                        aria-expanded={openItem === "brake"}
-                      >
-                        <strong>Braking System</strong>
-                        <span className="toggle-icon">
-                          {openItem === "brake" ? "−" : "+"}
-                        </span>
-                      </button>
-                      {openItem === "brake" && (
-                        <div className="spec-content">
-                          Hydraulic disc brakes
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Battery Hours */}
-                    <div className="spec-item">
-                      <button
-                        className="spec-toggle"
-                        onClick={() => toggleItem("hours")}
-                        aria-expanded={openItem === "hours"}
-                      >
-                        <strong>Battery Hours</strong>
-                        <span className="toggle-icon">
-                          {openItem === "hours" ? "−" : "+"}
-                        </span>
-                      </button>
-                      {openItem === "hours" && (
-                        <div className="spec-content">6–8 hours</div>
-                      )}
-                    </div>
-                  </>
-                )}
-
-                {/* Tab 3: Performance */}
-                {activeTab === "performance" && (
-                  <>
-                    {/* Speed Modes */}
-                    <div className="spec-item">
-                      <button
-                        className="spec-toggle"
-                        onClick={() => toggleItem("speed")}
-                        aria-expanded={openItem === "speed"}
-                      >
-                        <strong>Speed Modes</strong>
-                        <span className="toggle-icon">
-                          {openItem === "speed" ? "−" : "+"}
-                        </span>
-                      </button>
-                      {openItem === "speed" && (
-                        <div className="spec-content">
-                          <ul>
-                            <li>Gear 1: 25 km/h</li>
-                            <li>Gear 2: 35 km/h</li>
-                            <li>Gear 3: 45 km/h</li>
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Battery Life */}
-                    <div className="spec-item">
-                      <button
-                        className="spec-toggle"
-                        onClick={() => toggleItem("life")}
-                        aria-expanded={openItem === "life"}
-                      >
-                        <strong>Battery Life</strong>
-                        <span className="toggle-icon">
-                          {openItem === "life" ? "−" : "+"}
-                        </span>
-                      </button>
-                      {openItem === "life" && (
-                        <div className="spec-content">48V 50A</div>
-                      )}
-                    </div>
-                  </>
+        {/* TAB CONTENT */}
+        <div>
+          {/* Tab 1: Features */}
+          {activeTab === "features" && (
+            <>
+              {/* Display */}
+              <div className="spec-item">
+                <button
+                  className="spec-toggle"
+                  onClick={() => toggleItem("display")}
+                  aria-expanded={openItem === "display"}
+                >
+                  <strong>Display</strong>
+                  <span className="toggle-icon">
+                    {openItem === "display" ? "−" : "+"}
+                  </span>
+                </button>
+                {openItem === "display" && (
+                  <div className="spec-content">
+                    Multifunctional LED display, clearly visible under sunlight.
+                  </div>
                 )}
               </div>
-            </section>
 
-            <button
-              className="mt-3 rent-now"
-              style={{ background: "rgb(26, 59, 25)" }}
+              {/* Lighting */}
+              <div className="spec-item">
+                <button
+                  className="spec-toggle"
+                  onClick={() => toggleItem("lighting")}
+                  aria-expanded={openItem === "lighting"}
+                >
+                  <strong>Lighting</strong>
+                  <span className="toggle-icon">
+                    {openItem === "lighting" ? "−" : "+"}
+                  </span>
+                </button>
+                {openItem === "lighting" && (
+                  <div className="spec-content">
+                    <ul>
+                      <li>Front high-brightness headlight with wide aperture</li>
+                      <li>Rear light with laser projection for night safety</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Phone Holder */}
+              <div className="spec-item">
+                <button
+                  className="spec-toggle"
+                  onClick={() => toggleItem("holder")}
+                  aria-expanded={openItem === "holder"}
+                >
+                  <strong>Phone Holder</strong>
+                  <span className="toggle-icon">
+                    {openItem === "holder" ? "−" : "+"}
+                  </span>
+                </button>
+                {openItem === "holder" && (
+                  <div className="spec-content">USB port (2.1A output)</div>
+                )}
+              </div>
+            </>
+          )}
+
+          {/* Tab 2: Safety */}
+          {activeTab === "safety" && (
+            <>
+              {/* Safety System */}
+              <div className="spec-item">
+                <button
+                  className="spec-toggle"
+                  onClick={() => toggleItem("safety")}
+                  aria-expanded={openItem === "safety"}
+                >
+                  <strong>Safety System</strong>
+                  <span className="toggle-icon">
+                    {openItem === "safety" ? "−" : "+"}
+                  </span>
+                </button>
+                {openItem === "safety" && (
+                  <div className="spec-content">
+                    <ul>
+                      <li>Smart anti-theft remote (alarm + keyless start)</li>
+                      <li>NFC smart unlock</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Braking System */}
+              <div className="spec-item">
+                <button
+                  className="spec-toggle"
+                  onClick={() => toggleItem("brake")}
+                  aria-expanded={openItem === "brake"}
+                >
+                  <strong>Braking System</strong>
+                  <span className="toggle-icon">
+                    {openItem === "brake" ? "−" : "+"}
+                  </span>
+                </button>
+                {openItem === "brake" && (
+                  <div className="spec-content">Hydraulic disc brakes</div>
+                )}
+              </div>
+
+              {/* Battery Hours */}
+              <div className="spec-item">
+                <button
+                  className="spec-toggle"
+                  onClick={() => toggleItem("hours")}
+                  aria-expanded={openItem === "hours"}
+                >
+                  <strong>Battery Hours</strong>
+                  <span className="toggle-icon">
+                    {openItem === "hours" ? "−" : "+"}
+                  </span>
+                </button>
+                {openItem === "hours" && (
+                  <div className="spec-content">6–8 hours</div>
+                )}
+              </div>
+            </>
+          )}
+
+          {/* Tab 3: Performance */}
+          {activeTab === "performance" && (
+            <>
+              {/* Speed Modes */}
+              <div className="spec-item">
+                <button
+                  className="spec-toggle"
+                  onClick={() => toggleItem("speed")}
+                  aria-expanded={openItem === "speed"}
+                >
+                  <strong>Speed Modes</strong>
+                  <span className="toggle-icon">
+                    {openItem === "speed" ? "−" : "+"}
+                  </span>
+                </button>
+                {openItem === "speed" && (
+                  <div className="spec-content">
+                    <ul>
+                      <li>Gear 1: 25 km/h</li>
+                      <li>Gear 2: 35 km/h</li>
+                      <li>Gear 3: 45 km/h</li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              {/* Battery Life */}
+              <div className="spec-item">
+                <button
+                  className="spec-toggle"
+                  onClick={() => toggleItem("life")}
+                  aria-expanded={openItem === "life"}
+                >
+                  <strong>Battery Life</strong>
+                  <span className="toggle-icon">
+                    {openItem === "life" ? "−" : "+"}
+                  </span>
+                </button>
+                {openItem === "life" && (
+                  <div className="spec-content">48V 50A</div>
+                )}
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+
+            <button 
+              className="mt-3 rent-now" 
+              style={{ background: 'rgb(26, 59, 25)' }} 
               onClick={handleClick}
               aria-label="Open Rental Modal"
             >
               <span className="text-light">Rent Now</span>
             </button>
 
-            <div style={{ padding: 24 }}>
-              <h1>Pure Kit</h1>
-              <p>Price: A$65.00</p>
-              <button
-                style={{
-                  padding: "12px 24px",
-                  backgroundColor: "#6772e5",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 6,
-                  cursor: "pointer",
-                  fontSize: 16,
-                }}
-                onClick={handlePayNow}
-              >
-                Pay Now
-              </button>
-            </div>
-
             {showModal && (
-              <div
-                className="modal fade show"
-                style={{
-                  display: "block",
-                  opacity: 1,
-                  transition: "opacity 0.3s ease",
-                }}
-                aria-labelledby="modalLabel"
-                aria-hidden="false"
-              >
-                <div
-                  className="modal-backdrop fade show"
-                  style={{
-                    backdropFilter: "blur(5px)",
-                    position: "fixed",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    zIndex: -1,
-                    backgroundColor: "rgba(0,0,0,0.8)",
-                  }}
-                ></div>
+              <div className="modal fade show" style={{ display: 'block', opacity: 1, transition: 'opacity 0.3s ease' }} aria-labelledby="modalLabel" aria-hidden="false">
+                <div className="modal-backdrop fade show" style={{ backdropFilter: 'blur(5px)', position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, backgroundColor: 'rgba(0,0,0,0.8)' }}></div>
 
-                <div
-                  className="modal-dialog d-flex justify-content-center align-items-center"
-                  style={{ minHeight: "100vh" }}
-                >
+                <div className="modal-dialog d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
                   <div className="modal-content">
                     <div className="modal-header">
-                      <h5 className="modal-title text-orange" id="modalLabel">
-                        Social Media Links
-                      </h5>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        onClick={handleClose}
-                        aria-label="Close"
-                      ></button>
+                      <h5 className="modal-title text-orange" id="modalLabel">Social Media Links</h5>
+                      <button type="button" className="btn-close" onClick={handleClose} aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
                       <div className="d-flex justify-content-around">
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href="https://www.instagram.com/beyondbikes_vic/"
-                          className="text-decoration-none text-center"
-                        >
-                          <Image
-                            src={Instagram}
-                            height={30}
-                            width={30}
-                            alt="Instagram Logo"
-                          />
-                          <br />
-                          <span className="text-orange fs-6">Instagram</span>
+                        <a target='_blank' rel="noopener noreferrer" href="https://www.instagram.com/beyondbikes_vic/" className="text-decoration-none text-center">
+                          <Image src={Instagram} height={30} width={30} alt="Instagram Logo"/>
+                          <br /><span className="text-orange fs-6">Instagram</span>
                         </a>
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href="https://g.co/kgs/66Atysa"
-                          className="text-decoration-none text-center"
-                        >
-                          <Image
-                            src={Google}
-                            height={30}
-                            width={30}
-                            alt="Google Logo"
-                          />
-                          <br />
-                          <span className="text-orange fs-6">Google</span>
+                        <a target='_blank' rel="noopener noreferrer" href="https://g.co/kgs/66Atysa" className="text-decoration-none text-center">
+                          <Image src={Google} height={30} width={30} alt="Google Logo"/>
+                          <br /><span className="text-orange fs-6">Google</span>
                         </a>
-                        <a
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          href="tel:+61422032961"
-                          className="text-decoration-none text-center"
-                          title="Call Us"
-                        >
-                          <Image
-                            src={Call}
-                            height={30}
-                            width={30}
-                            alt="Phone Logo"
-                          />
-                          <br />
-                          <span className="text-orange fs-6">Call</span>
+                        <a target='_blank' rel="noopener noreferrer" href="tel:+61422032961" className="text-decoration-none text-center" title="Call Us">
+                          <Image src={Call} height={30} width={30} alt="Phone Logo"/>
+                          <br /><span className="text-orange fs-6">Call</span>
                         </a>
                       </div>
                     </div>
                     <div className="modal-footer">
-                      <button
-                        type="button"
-                        className="btn"
-                        style={{ background: "#1A3B19", color: "white" }}
-                        onClick={handleClose}
-                      >
-                        Close
-                      </button>
+                      <button type="button" className="btn" style={{ background:'#1A3B19', color:'white' }} onClick={handleClose}>Close</button>
                     </div>
                   </div>
                 </div>
@@ -1058,22 +918,16 @@ export default function CartoonDetailsPage() {
 
         {/* Product Description */}
         <section className="container py-4" aria-labelledby="description-title">
-          <h2
-            id="description-title"
-            className="fw-bold mb-4"
-            style={{ color: "rgb(26, 59, 25)" }}
-          >
-            Description
-          </h2>
-
-          <article className="insurance-box fs-5">
-            <p>Insurance Offered</p>
-            <p>✔ Insurance only covers theft of battery.</p>
-            <p>✘ No accident compensation.</p>
-            <p>✘ No third-party costs insured.</p>
-          </article>
-
-          {/* <article>
+                  <h2 id="description-title" className="fw-bold mb-4" style={{ color: 'rgb(26, 59, 25)' }}>Description</h2>
+        
+                  <article className='insurance-box fs-5'>
+                    <p>Insurance Offered</p>
+                    <p>✔ Insurance only covers theft of battery.</p>
+                    <p>✘ No accident compensation.</p>
+                    <p>✘ No third-party costs insured.</p>
+                  </article>
+        
+                  {/* <article>
                     <h3 style={{ color: 'rgb(26, 59, 25)' }} className='mt-3 mb-5'>Rental Information</h3>
                     <div className="info-cards">
                       <div className="info-card">
@@ -1100,39 +954,39 @@ export default function CartoonDetailsPage() {
                     </div>
                   </article> */}
 
-          <article>
-            <h3 style={{ color: "rgb(26, 59, 25)" }} className="mt-3 mb-5">
-              Rental Information
-            </h3>
-            <div className="info-cards">
-              {/* Left Card */}
-              <div className="info-card">
-                <h4 className="info-header">Documents for Rent</h4>
-                <ul className="info-list">
-                  <li>Name</li>
-                  <li>Phone Number</li>
-                  <li>Address & Unit Number</li>
-                  <li>Email</li>
-                  <li>Valid Visa Grant</li>
-                  <li>Passport</li>
-                </ul>
-              </div>
+                  
+                  <article>
+                    <h3 style={{ color: 'rgb(26, 59, 25)' }} className='mt-3 mb-5'>Rental Information</h3>
+                    <div className="info-cards">
+    {/* Left Card */}
+    <div className="info-card">
+      <h4 className="info-header">Documents for Rent</h4>
+      <ul className="info-list">
+        <li>Name</li>
+        <li>Phone Number</li>
+        <li>Address & Unit Number</li>
+        <li>Email</li>
+        <li>Valid Visa Grant</li>
+        <li>Passport</li>
+      </ul>
+    </div>
 
-              {/* Right Card */}
-              <div className="info-card">
-                <h4 className="info-header">Our Rental Fee Includes</h4>
-                <ul className="info-list">
-                  <li>Delivery bag</li>
-                  <li>Locks (2)</li>
-                  <li>Helmet</li>
-                  <li>Charger</li>
-                  <li>Basic maintenance</li>
-                </ul>
-              </div>
-            </div>
-          </article>
+    {/* Right Card */}
+    <div className="info-card">
+      <h4 className="info-header">Our Rental Fee Includes</h4>
+      <ul className="info-list">
+        <li>Delivery bag</li>
+        <li>Locks (2)</li>
+        <li>Helmet</li>
+        <li>Charger</li>
+        <li>Basic maintenance</li>
+      </ul>
+    </div>
+  </div>
 
-          {/* <div className="row row-cols-1 row-cols-md-3 g-4 mt-5">
+                  </article>
+        
+                  {/* <div className="row row-cols-1 row-cols-md-3 g-4 mt-5">
                     <div className="col-md-4">
                       <div className="border rounded py-4 px-2 h-100">
                         <Image src="/images/speed.svg" alt="Top Speed Icon" width={40} height={40} />
@@ -1155,7 +1009,8 @@ export default function CartoonDetailsPage() {
                       </div>
                     </div>
                   </div> */}
-        </section>
+                  
+                </section>
       </main>
       <Footer />
     </>

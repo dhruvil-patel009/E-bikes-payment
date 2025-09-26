@@ -385,9 +385,7 @@ const features = [
               <span className="fs-4 fw-semibold" itemProp="name">
                 {feature.title}
               </span>
-              <span className="mx-3" style={{ color: "rgba(255, 255, 255, 0.5)" }}>
-                •
-              </span>
+             
             </div>
           ))}
         </div>
@@ -400,22 +398,23 @@ const features = [
         className="container text-center py-5 scroll-animate"
         aria-labelledby="why-choose-heading"
         initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+  whileInView={{ opacity: 1, y: 0 }}    
+  viewport={{ once: true, amount: 0.3 }} 
+  transition={{ duration: 0.6 }}
         itemScope
         itemType="https://schema.org/Service"
       >
         <h2
           id="why-choose-heading"
-          className="mb-3 fw-bold"
+          className="mb-5 fw-bold heading-underline"
           style={{ color: "#1A3B19", fontFamily: "system-ui" }}
           itemProp="name"
         >
-          Why Choose Our Beyond Bikes
+          Why Choose Beyond Bikes
         </h2>
         
 
-        <div className="row">
+        <div className="row g-sm-2 g-3">
           {/* Feature 1 */}
           <div className="col-12 col-md-4">
             <div
@@ -423,7 +422,9 @@ const features = [
               itemScope
               itemType="https://schema.org/Service"
             >
-              <i className="bi bi-fuel-pump fs-1 mb-3" style={{ color: "#1A3B19" }}></i>
+              <div className="icon-circle mb-3">
+  <i className="bi bi-fuel-pump"></i>
+</div>
               <h3 className="fs-5 fw-semibold mb-2" style={{ color: "#1A3B19",fontStyle:'Toronto Subway W01 Regular' }} itemProp="serviceType">
                 Tired Of High Fuel Costs and Unreliable Rides?
               </h3>
@@ -442,7 +443,8 @@ const features = [
               itemScope
               itemType="https://schema.org/Service"
             >
-              <i className="bi bi-lightning-charge fs-1 mb-3" style={{ color: "#1A3B19" }}></i>
+              <div className="icon-circle mb-3">
+              <i className="bi bi-lightning-charge fs-1" style={{ color: "#1A3B19" }}></i></div>
               <h3 className="fs-5 fw-semibold mb-2" style={{ color: "#1A3B19" }} itemProp="serviceType">
                 SMOOTH ELECTRIC RIDE - NO GEARS, NO STRESS
               </h3>
@@ -460,7 +462,8 @@ Glide through traffic with ease and comfort.              </p>
               itemScope
               itemType="https://schema.org/Service"
             >
-              <i className="bi bi-cash-coin fs-1 mb-3" style={{ color: "#1A3B19" }}></i>
+              <div className="icon-circle mb-3">
+              <i className="bi bi-cash-coin fs-1" style={{ color: "#1A3B19" }}></i></div>
               <h3 className="fs-5 fw-semibold mb-2" style={{ color: "#1A3B19" }} itemProp="serviceType">
 SAVE FUEL. SAVE MONEY.
               </h3>
@@ -484,7 +487,8 @@ No fuel. No extra maintenance.
               itemScope
               itemType="https://schema.org/Service"
             >
-              <i className="bi bi-geo-alt fs-1 mb-3" style={{ color: "#1A3B19" }}></i>
+              <div className="icon-circle mb-3">
+              <i className="bi bi-geo-alt fs-1" style={{ color: "#1A3B19" }}></i></div>
               <h3 className="fs-5 fw-semibold mb-2" style={{ color: "#1A3B19" }} itemProp="serviceType">
                 BUILT FOR AUSTRALIAN
 LIFE
@@ -508,16 +512,16 @@ Beyond Bikes fits your lifestyle.
               itemScope
               itemType="https://schema.org/Service"
             >
-              <i className="bi bi-calendar-check fs-1 mb-3" style={{ color: "#1A3B19" }}></i>
+              <div className="icon-circle mb-3">
+              <i className="bi bi-calendar-check fs-1" style={{ color: "#1A3B19" }}></i></div>
               <h3 className="fs-5 fw-semibold mb-2" style={{ color: "#1A3B19" }} itemProp="serviceType">
-                FREE TEST RIDE + EASY
-BOOKING
+                FREE TEST RIDE + EASY BOOKING
               </h3>
               <p className="text-muted small" style={{ fontFamily: "system-ui" }} itemProp="description">
 Still unsure? Try it first! <br />
 Free Test Ride Available
 Call/WhatsApp: +61 422 032 961
-DM us now to book & start riding smarter!             </p>
+DM us now to book & start riding smarter!</p>
             </div>
           </div>
 
@@ -527,7 +531,7 @@ DM us now to book & start riding smarter!             </p>
 
 <section className="bg-white scroll-animate" id="bikes-for-rent">
   <div className="container px-3">
-    <h2 className="fw-bolder mb-4 animated-underline" style={{ color: "#1a3b19",textAlign:'center' }}>
+    <h2 className="fw-bolder mb-4 heading-underline" style={{ color: "#1a3b19",textAlign:'center' }}>
       Bikes For Rent
     </h2>
 
@@ -569,7 +573,44 @@ DM us now to book & start riding smarter!             </p>
             topspeed: "45 MPH",
           },
           price: "70.00 AUD",
+        },
+        {
+          name: "E-bike 8-10h",
+          img: "/images/Product-images-beyond-bikes-product-one-crop (3).png",
+          alt: "E-bike 8-10h",
+          specs: {
+            batteryhours: "8-10 hours",
+            motor: 500,
+            batterylife: "48V 70A",
+            topspeed: "45 MPH",
+          },
+          price: "65.00 AUD",
+        },
+        {
+          name: "E-bike 8-10h",
+          img: "/images/Product-images-beyond-bikes-product-one-crop (3).png",
+          alt: "E-bike 8-10h",
+          specs: {
+            batteryhours: "8-10 hours",
+            motor: 500,
+            batterylife: "48V 70A",
+            topspeed: "45 MPH",
+          },
+          price: "65.00 AUD",
+        },
+        {
+          name: "E-bike 8-10h",
+          img: "/images/Product-images-beyond-bikes-product-one-crop (3).png",
+          alt: "E-bike 8-10h",
+          specs: {
+            batteryhours: "8-10 hours",
+            motor: 500,
+            batterylife: "48V 70A",
+            topspeed: "45 MPH",
+          },
+          price: "65.00 AUD",
         }
+        
       ].map((bike, idx) => (
         <div
           className="col-12 col-md-6 col-lg-4"
@@ -669,7 +710,7 @@ DM us now to book & start riding smarter!             </p>
   itemType="https://schema.org/OfferCatalog"
 >
   <div className="container">
-    <h2 className="fw-bold mb-4 text-center" style={{ color: "#1a3b19 !important",fontFamily: "system-ui" }} itemProp="name">
+    <h2 className="fw-bold mb-4 text-center heading-underline" style={{ color: "#1a3b19 !important",fontFamily: "system-ui" }} itemProp="name">
       Accessories Provided
     </h2>
     <div className="row g-4">

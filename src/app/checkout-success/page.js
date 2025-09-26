@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import '../styles/checkout.css'
 
 export default function CheckoutSuccessPage() {
   const [paymentInfo, setPaymentInfo] = useState(null);
@@ -80,16 +81,16 @@ export default function CheckoutSuccessPage() {
         />
 
         {/* Title */}
-        <h1 className="text-2xl font-extrabold text-green-600 mb-2">
+        <h1 className="mb-2" style={{color:'#1A3B19',fontSize:'30px',fontWeight:'600'}}>
           Payment Successful!
         </h1>
-        <p className="text-gray-600 mb-6">
+        <p className="text-muted mb-4">
           Your payment has been processed successfully 🎉
         </p>
 
         {/* Payment Summary */}
-        <div className="bg-gray-50 border-gray-200 rounded-xl p-4 text-left text-sm mb-6">
-          <p className="text-2xl font-bold text-center mb-4 text-gray-800">
+        {/* <div className="bg-gray-50 border-gray-200 rounded-xl p-4 text-left text-sm mb-6">
+          <p className="font-bold text-center mb-4" style={{fontSize:'25px',fontWeight:'600',color:'#1A3B19'}}>
             {paymentInfo.amount}
           </p>
           <div className="space-y-2">
@@ -112,10 +113,37 @@ export default function CheckoutSuccessPage() {
               </span>
             </div>
           </div>
-        </div>
+        </div> */}
+
+       <div className="bg-light rounded p-3 text-start small mb-3">
+            <div className="d-flex justify-content-between align-items-center mb-1">
+              <span className="text-muted">Transaction ID</span>
+              <div className="d-flex align-items-center gap-2">
+                <span className="fw-medium text-dark">{paymentInfo.transactionId}</span>
+                <button className="btn btn-link p-0 text-muted" style={{ fontSize: "14px" }}>
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div className="d-flex justify-content-between mb-1">
+              <span className="text-muted">Date & Time</span>
+              <span className="fw-medium text-dark">{paymentInfo.date}</span>
+            </div>
+            <div className="d-flex justify-content-between">
+              <span className="text-muted">Payment Method</span>
+              <span className="fw-medium text-dark">{paymentInfo.method}</span>
+            </div>
+          </div>
 
         {/* Receipt Info */}
-        <p className="text-gray-600 text-sm mb-6">
+        <p className="text-muted text-sm mb-6">
           A copy of the receipt has been sent to{" "}
           <span className="text-green-600 font-semibold">
             {paymentInfo.email}
@@ -130,14 +158,14 @@ export default function CheckoutSuccessPage() {
             rel="noopener noreferrer"
           >
             <button
-              className="px-5 py-2 rounded-xl font-semibold shadow-md hover:bg-green-600 hover:shadow-lg transition"
-              style={{ backgroundColor: "green" }}
+              className="rent-now-payment"
+              
             >
               View Receipt
             </button>
           </a>
           <Link href="/">
-            <button className="px-5 py-2 rounded-xl bg-blue-500 font-semibold shadow-md hover:bg-blue-600 hover:shadow-lg transition">
+            <button className="btn btn-secondary ms-4">
               Return to Home
             </button>
           </Link>

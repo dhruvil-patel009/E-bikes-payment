@@ -419,8 +419,8 @@ export default function Contact() {
 
       <main>
         <section className="container px-sm-0 px-3 py-5">
-          <h1 className='text-center fw-bold pb-4' style={{color: '#1a3b19',fontFamily:'system-ui'}}>Contact Beyond Bikes</h1>
-          <div className="row g-4 align-items-start">
+          <h1 className='text-center fw-bold pb-4 heading-underline-contact-main' style={{color: '#1a3b19',fontFamily:'system-ui'}}>Contact Beyond Bikes</h1>
+          <div className="row g-5 align-items-start">
 
             {/* Form Section */}
             <div className="col-lg-6" itemScope itemType="https://schema.org/ContactPage">
@@ -437,77 +437,94 @@ export default function Contact() {
 
                 <div className="row g-3 mb-3">
                   <div className="col-md-6">
-                    <label htmlFor="name" className="visually-hidden">Full Name</label>
-                    <input
-                      type="text"
-                      id="name"
-                      className="form-control form-control-lg bg-light"
-                      placeholder="Your Name"
-                      name="Full Name"
-                      required
-                      aria-required="true"
-                      onChange={(e) => validateField(e.target.name, e.target.value)}
-                    />
-                    {errors["Full Name"] && (   // ✅ Added
-  <small className="text-danger ms-3">{errors["Full Name"]}</small>
-)}
-                  </div>
+                    
+                    <div className="form-floating">
+      <input
+        type="text"
+        id="name"
+        className={`form-control ${errors["Full Name"] ? "is-invalid" : ""}`}
+        placeholder="Your Name"
+        name="Full Name"
+        required
+        aria-required="true"
+        onChange={(e) => validateField(e.target.name, e.target.value)}
+      />
+      <label htmlFor="name">Full Name</label>
+    </div>
+    {errors["Full Name"] && (
+      <small className="text-danger ms-2">{errors["Full Name"]}</small>
+    )}
+  </div>
                   <div className="col-md-6">
-                    <label htmlFor="email" className="visually-hidden">Email Address</label>
-                    <input
-                      type="email"
-                      id="email"
-                      className="form-control form-control-lg bg-light"
-                      placeholder="Your Email"
-                      name="Email Address"
-                      required
-                      aria-required="true"
-                      onChange={(e) => validateField(e.target.name, e.target.value)}
-                    />
-                    {errors["Email Address"] && (   // ✅ Added
-  <small className="text-danger ms-3">{errors["Email Address"]}</small>
-)}
-                  </div>
+  <div className="form-floating">
+    <input
+      type="email"
+      id="email"
+      className="form-control form-control-lg"
+      placeholder="Your Email"
+      name="Email Address"
+      required
+      aria-required="true"
+      onChange={(e) => validateField(e.target.name, e.target.value)}
+    />
+    <label htmlFor="email">Email Address</label>
+  </div>
+
+  {errors["Email Address"] && (
+    <small className="text-danger ms-3">{errors["Email Address"]}</small>
+  )}
+</div>
+
                 </div>
 
                 <div className="row g-3 mb-3">
                   
                   <div className="col-md-6">
-                    <label htmlFor="phone" className="visually-hidden">Phone Number</label>
-                    <input
-                      type="text"
-                      id="phone"
-                      className="form-control form-control-lg bg-light"
-                      placeholder="Your Phone Number"
-                      name="Phone Number"
-                      onChange={(e) => validateField(e.target.name, e.target.value)}
-                    />
-                    {errors["Phone Number"] && (   // ✅ Added
-  <small className="text-danger ms-3">{errors["Phone Number"]}</small>
-)}
-                  </div>
+  <div className="form-floating">
+    <input
+      type="text"
+      id="phone"
+      className="form-control form-control-lg"
+      placeholder="Your Phone Number"
+      name="Phone Number"
+      onChange={(e) => validateField(e.target.name, e.target.value)}
+    />
+    <label htmlFor="phone">Phone Number</label>
+  </div>
 
-                  <div className="col-md-6">
-                    <label htmlFor="subject" className="visually-hidden">Subject</label>
-                    <input
-                      type="text"
-                      id="subject"
-                      className="form-control form-control-lg bg-light"
-                      placeholder="Your Subject"
-                      name="Subject"
-                    />
-                  </div>
+  {errors["Phone Number"] && (
+    <small className="text-danger ms-3">{errors["Phone Number"]}</small>
+  )}
+</div>
+
+
+                 <div className="col-md-6">
+  <div className="form-floating">
+    <input
+      type="text"
+      id="subject"
+      className="form-control form-control-lg"
+      placeholder="Your Subject"
+      name="Subject"
+    />
+    <label htmlFor="subject">Subject</label>
+  </div>
+</div>
+
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="message" className="visually-hidden">Message</label>
-                  <textarea
-                    id="message"
-                    className="form-control form-control-lg bg-light"
-                    rows="5"
-                    placeholder="Your Message"
-                    name="Message"
-                  ></textarea>
+                 <div className="form-floating">
+  <textarea
+    id="message"
+    className="form-control form-control-lg"
+    placeholder="Your Message"
+    name="Message"
+    style={{ height: "150px" }} // adjust height like rows
+  ></textarea>
+  <label htmlFor="message">Message</label>
+</div>
+
                 </div>
 
                 <button
@@ -573,6 +590,7 @@ export default function Contact() {
         </section>
         <section className="py-5 bg-white" id="contact-info">
   <div className="container">
+   
     <div className="row text-center g-4">
       
       {/* Address */}
@@ -609,7 +627,7 @@ export default function Contact() {
             <i className="bi bi-telephone-fill text-white fs-3" aria-hidden="true"></i>
           </div>
           <p className="mb-0">
-            <strong>Phone:</strong>{" "}
+            <strong>Phone:</strong><br />
             <a href="tel:+61422032961" className="text-decoration-none text-dark">
               +61 422 032 961
             </a>
@@ -631,7 +649,7 @@ export default function Contact() {
             <i className="bi bi-envelope-fill text-white fs-3" aria-hidden="true"></i>
           </div>
           <p className="mb-0">
-            <strong>Email:</strong>{" "}
+            <strong>Email:</strong><br />
             <a href="mailto:info.beyondbikes@gmail.com" className="text-decoration-none text-dark">
               info.beyondbikes@gmail.com
             </a>
