@@ -46,11 +46,11 @@
     {
       "id": 5,
       "name": "Black E-bike",
-      "image": "/images/Latest-Black-Cycle-Product.png",
+      "image": "/images/Latest-Black-Cycle-Product-26-09.png",
       "price": "$70.00 AUD",
       "oldPrice": "$80.00 AUD",
       "battery": "48V 80A",
-      "batteryHours": "10-12 hours",
+      "batteryHours": "12-15 hours",
       "topSpeed": "45 MPH"
     },
 
