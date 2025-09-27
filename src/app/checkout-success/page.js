@@ -1,4 +1,4 @@
-// // src/app/checkout-sucess/page.js 
+// // src/app/checkout-sucess/page.js
 // "use client";
 
 // import { useEffect, useState } from "react";
@@ -45,7 +45,7 @@
 //             method: pi.charges?.data[0]?.payment_method_details?.card
 //               ? `${pi.charges.data[0].payment_method_details.card.brand.toUpperCase()} **** ${pi.charges.data[0].payment_method_details.card.last4
 //               }`
-//               : pi.payment_method_types?.[0]?.toUpperCase() || "Unknown", 
+//               : pi.payment_method_types?.[0]?.toUpperCase() || "Unknown",
 //               email: pi.receipt_email || "N/A",
 //             transactionId:
 //               pi.charges?.data[0]?.id || // ✅ Prefer charge id
@@ -64,7 +64,6 @@
 //         setLoading(false);
 //       }
 //     }
-
 
 //     fetchPaymentDetails();
 //   }, []);
@@ -191,18 +190,26 @@
 //   );
 // }
 
-
 // src/app/checkout-sucess/page.js
 "use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import '../styles/checkout.css'
+import "../styles/checkout.css";
 
 export default function CheckoutSuccessPage() {
   const [paymentInfo, setPaymentInfo] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  // Map of Stripe payment method types -> readable labels
+  const paymentMethodLabels = {
+    card: "CARD",
+    google_pay: "GPAY",
+    gpay: "GPAY",
+    apple_pay: "APPLE PAY",
+    upi: "UPI",
+  };
 
   useEffect(() => {
     // Mark checkout as used
@@ -219,14 +226,35 @@ export default function CheckoutSuccessPage() {
       }
 
       try {
-        const res = await fetch(`/api/get-payment-intent?pi=${paymentIntentId}`);
+        const res = await fetch(
+          `/api/get-payment-intent?pi=${paymentIntentId}`
+        );
         const data = await res.json();
 
         if (data.paymentIntent) {
+          console.log("🔎 Full Payment Intent:", data.paymentIntent);
           const pi = data.paymentIntent;
-          const charge = pi.charges?.data?.[0];
-          const invoicePdfUrl = charge?.receipt_url || "#";
+          // const charge = pi.charges?.data?.[0];
+          const charge = data.charge;
+          // const invoicePdfUrl = charge?.receipt_url || "#";
+          // Determine payment method type
+          const type = pi.payment_method_types?.[0] || "unknown";
+          const paymentMethodType =
+            paymentMethodLabels[type] || type.toUpperCase();
 
+          // Card brand + last 4 only if it's a card payment
+          const paymentMethodDetails =
+            type === "card" && charge?.payment_method_details?.card
+              ? `${charge.payment_method_details.card.brand.toUpperCase()} **** ${
+                  charge.payment_method_details.card.last4
+                }`
+              : null;
+
+          // ✅ Log before setting state
+          console.log(
+            "Fetched payment method:",
+            charge?.payment_method_details
+          );
 
           setPaymentInfo({
             id: pi.id,
@@ -235,9 +263,8 @@ export default function CheckoutSuccessPage() {
               currency: pi.currency.toUpperCase(),
             }),
             date: new Date(pi.created * 1000).toLocaleString(),
-            method: charge?.payment_method_details?.card
-              ? `${charge.payment_method_details.card.brand.toUpperCase()} **** ${charge.payment_method_details.card.last4}`
-              : pi.payment_method_types?.[0]?.toUpperCase() || "Unknown",
+            paymentMethodType,
+            paymentMethodDetails,
             email: pi.receipt_email || "N/A",
             invoicePdfUrl: charge?.receipt_url || "#", // ✅ Use only the charge's receipt_url
           });
@@ -251,6 +278,14 @@ export default function CheckoutSuccessPage() {
 
     fetchPaymentDetails();
   }, []);
+
+  // ✅ Log whenever paymentInfo changes
+  useEffect(() => {
+    if (paymentInfo) {
+      console.log("✅ Payment Info Updated:", paymentInfo);
+      console.log("✅ Payment Method is:", paymentInfo.method);
+    }
+  }, [paymentInfo]);
 
   if (loading) {
     return (
@@ -271,7 +306,6 @@ export default function CheckoutSuccessPage() {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-green-100 via-blue-50 to-purple-100 p-4">
       <div className="bg-white shadow-2xl rounded-2xl p-6 sm:p-8 max-w-md w-full text-center transition-all duration-300">
-
         {/* Success GIF */}
         <Image
           src="/images/Success.gif"
@@ -283,7 +317,10 @@ export default function CheckoutSuccessPage() {
         />
 
         {/* Title */}
-        <h1 className="mb-2" style={{ color: '#1A3B19', fontSize: '30px', fontWeight: '600' }}>
+        <h1
+          className="mb-2"
+          style={{ color: "#1A3B19", fontSize: "30px", fontWeight: "600" }}
+        >
           Payment Successful!
         </h1>
         <p className="text-muted mb-4">
@@ -302,33 +339,45 @@ export default function CheckoutSuccessPage() {
           </div>
           <div className="d-flex justify-content-between">
             <span className="text-muted">Payment Method</span>
-            <span className="fw-medium text-dark">{paymentInfo.method}</span>
+            <span className="fw-medium text-dark">
+              {paymentInfo.paymentMethodType}
+            </span>
           </div>
+
+          {paymentInfo.paymentMethodDetails && (
+            <div className="d-flex justify-content-between">
+              <span className="text-muted">Card</span>
+              <span className="fw-medium text-dark">
+                {paymentInfo.paymentMethodDetails}
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Receipt Info */}
         <p className="text-muted text-sm mb-6">
           A copy of the receipt has been sent to{" "}
-          <span className="text-green-600 font-semibold">{paymentInfo.email}</span>
+          <span className="text-green-600 font-semibold">
+            {paymentInfo.email}
+          </span>
         </p>
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-5">
           {/* Download Stripe Invoice PDF */}
-         <a href={paymentInfo.invoicePdfUrl} target="_blank" rel="noopener noreferrer">
-  <button className="rent-now-payment">
-    Download Receipt
-  </button>
-</a>
+          <a
+            href={paymentInfo.invoicePdfUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="rent-now-payment">Download Receipt</button>
+          </a>
 
           {/* Return Home */}
           <Link href="/">
-            <button className="btn btn-secondary ms-4">
-              Return to Home
-            </button>
+            <button className="btn btn-secondary ms-4">Return to Home</button>
           </Link>
         </div>
-
       </div>
     </div>
   );

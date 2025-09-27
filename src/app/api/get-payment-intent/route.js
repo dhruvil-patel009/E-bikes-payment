@@ -15,11 +15,20 @@ export async function GET(req) {
     );
 
   try {
-    const paymentIntent = await stripe.paymentIntents.retrieve(pi, {
-  expand: ["charges", "charges.data.payment_method_details", "invoice"],
-    });
+    //   const paymentIntent = await stripe.paymentIntents.retrieve(pi, {
+    // expand: ["charges", "charges.data.payment_method_details", "invoice"],
+    //   });
 
-    return NextResponse.json({ paymentIntent }, { status: 200 });
+    // 1️⃣ Fetch payment intent
+    const paymentIntent = await stripe.paymentIntents.retrieve(pi);
+
+    // 2️⃣ Fetch charge using latest_charge
+    let charge = null;
+    if (paymentIntent.latest_charge) {
+      charge = await stripe.charges.retrieve(paymentIntent.latest_charge);
+    }
+
+    return NextResponse.json({ paymentIntent, charge }, { status: 200 });
   } catch (err) {
     console.error("Error fetching payment intent:", err);
     return NextResponse.json({ error: err.message }, { status: 500 });
