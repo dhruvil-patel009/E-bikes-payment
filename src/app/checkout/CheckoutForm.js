@@ -215,8 +215,7 @@
 //   );
 // }
 
-
-// 24 September 
+// 24 September
 // src/app/components/CheckoutForm.jsx
 // "use client";
 // import React, { useEffect, useState } from "react";
@@ -331,7 +330,6 @@
 //   );
 // }
 
-
 "use client";
 import React, { useEffect, useState } from "react";
 import {
@@ -432,7 +430,7 @@ export default function CheckoutForm({
         <button
           type="submit"
           disabled={!stripe || loading}
-          className="rent-now-payment w-100 mt-3"
+          className="rent-now-payment w-100 mt-3 d-flex justify-content-center"
         >
           {loading
             ? "Processing..."

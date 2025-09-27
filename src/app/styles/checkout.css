@@ -164,7 +164,7 @@
 
  */
 
- /* =========================
+/* =========================
    Checkout Page Styles
    ========================= */
 
@@ -205,6 +205,11 @@
 
 .checkout-product-info p {
   margin: 0.2rem 0;
+}
+
+.total-border {
+  border-top: 1px solid #e9ecef;
+  padding-top: 1.5rem;
 }
 
 /* Payment Card (Stripe area) */
@@ -289,10 +294,11 @@
 }
 
 /* NEW: equal height columns */
-.row > .col-md-6 {
+.row>.col-md-6 {
   display: flex;
 }
-.row > .col-md-6 > .card {
+
+.row>.col-md-6>.card {
   flex: 1;
 }
 

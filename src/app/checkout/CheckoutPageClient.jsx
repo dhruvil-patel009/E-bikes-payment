@@ -87,7 +87,7 @@
 //   );
 // }
 
-
+// src/app/checkout/CheckoutPageClient 
 "use client";
 import React, { useEffect, useState, useRef } from "react";
 import { loadStripe } from "@stripe/stripe-js";
@@ -119,6 +119,8 @@ export default function CheckoutPageClient() {
   const [sessionUsed, setSessionUsed] = useState(false);
 
   const amount = Math.round(price * 100);
+  const [taxAmount, setTaxAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(price);
 
   useEffect(() => {
     async function createPaymentIntent() {
@@ -140,6 +142,11 @@ export default function CheckoutPageClient() {
         if (data.clientSecret) {
           setClientSecret(data.clientSecret);
           setPaymentIntentId(data.id);
+
+          // ✅ Set tax & total
+          setTaxAmount(data.taxAmount / 100); // Convert cents to dollars
+          setTotalAmount(data.totalAmount / 100);
+
           localStorage.setItem("checkoutActive", "true"); // prevent back nav reuse
         } else {
           console.error("Error creating PaymentIntent:", data);
@@ -181,7 +188,7 @@ export default function CheckoutPageClient() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [clientSecret, expired]);
+  }, [clientSecret, expired, paymentIntentId, router]);
 
   // ⛔ Prevent back navigation reuse
   useEffect(() => {
@@ -216,7 +223,7 @@ export default function CheckoutPageClient() {
 
   return (
     // <div className="checkout-page container py-5">
-     
+
 
     //   {/* Timer */}
     //   {clientSecret && (
@@ -253,87 +260,87 @@ export default function CheckoutPageClient() {
     //   </div>
     // </div>
     <div className="checkout-page container py-5">
-  {/* Timer */}
-  <h1 style={{color:'#1A3B19'}}>Complete Your Payment</h1>
+      {/* Timer */}
+      <h1 style={{ color: '#1A3B19' }}>Complete Your Payment</h1>
 
-  {/* Product Info */}
-  
-
-  {/* Summary */}
-  <div className="row g-4 mt-3">
-  <div className="col-md-6">
-    
-  <div className="checkout-summary card p-3 h-100">
-    {clientSecret && (
-  <div className="checkout-timer-box d-flex align-items-center mb-4">
-    <i className="bi bi-clock-fill me-2"></i>
-    <span>
-      Time left:{" "}
-      <strong>
-        {Math.floor(timeLeft / 60)}:
-        {(timeLeft % 60).toString().padStart(2, "0")}
-      </strong>
-    </span>
-  </div>
-)}
-
-<div className="checkout-product-info d-flex align-items-start mb-4">
-  <img
-    src="images/15-09-Latest-Freedom-Logo-12-05.png"
-    alt="Premium Mountain Bike"
-    className="checkout-product-img me-3"
-  />
-  <div>
-    <h6 className="fw-bold mb-1">E-Bike</h6>
-    <p className="text-muted small mb-1">
-      Rental Period: 3 days (Jun 15 - Jun 18)
-    </p>
-    <p className="text-muted small">Size: Medium</p>
-  </div>
-</div>
-
-   <p><span>Subtotal</span><span> {currency.toUpperCase()} {price}</span></p>
-    <p><span>Tax</span><span> {currency.toUpperCase()} {price}</span></p>
-    <p className="checkout-total"><span>Total</span><span> {currency.toUpperCase()} {price}</span></p>
-    {/* Receipt */}
-  <div className="alert alert-light d-flex align-items-center mt-3" role="alert">
-    <i className="bi bi-envelope me-2"></i>
-    Your receipt will be sent to: <strong className="ms-1">{email}</strong>
-  </div>
+      {/* Product Info */}
 
 
-  <div className="checkout-footer mt-4">
-    <span><i className="bi bi-shield-lock-fill"></i> Secure Payment</span>
-    <span><i className="bi bi-lock-fill"></i> SSL Encrypted</span>
-    <span><i className="bi bi-headset"></i> 24/7 Support</span>
-  </div>
-  </div>
+      {/* Summary */}
+      <div className="row g-4 mt-3">
+        <div className="col-md-6">
 
-  
-</div>
-  {/* Stripe Form */}
-  <div className="col-md-6 mt-5">
-  <div className="payment-card card p-3 h-100" style={{ maxWidth: 500 }}>
-    {clientSecret ? (
-      <Elements stripe={stripePromise} options={options}>
-        <CheckoutForm
-          clientSecret={clientSecret}
-          amount={amount}
-          currency={currency}
-          product={{ title: "Rental Payment" }}
-        />
-      </Elements>
-    ) : (
-      <div className="loading text-center py-5">Loading payment...</div>
-    )}
-  </div>
-  </div>
+          <div className="checkout-summary card p-3 h-100">
+            {clientSecret && (
+              <div className="checkout-timer-box d-flex align-items-center mb-4">
+                <i className="bi bi-clock-fill me-2"></i>
+                <span>
+                  Time left:{" "}
+                  <strong>
+                    {Math.floor(timeLeft / 60)}:
+                    {(timeLeft % 60).toString().padStart(2, "0")}
+                  </strong>
+                </span>
+              </div>
+            )}
 
-  
-</div>
-  {/* Footer */}
-  
-</div>
+            <div className="checkout-product-info d-flex align-items-start mb-4">
+              <img
+                src="images/15-09-Latest-Freedom-Logo-12-05.png"
+                alt="Premium Mountain Bike"
+                className="checkout-product-img me-3"
+              />
+              <div>
+                <h6 className="fw-bold mb-1">E-Bike</h6>
+                <p className="text-muted small mb-1">
+                  Rental Period: 3 days (Jun 15 - Jun 18)
+                </p>
+                <p className="text-muted small">Size: Medium</p>
+              </div>
+            </div>
+
+            <p><span>Subtotal</span><span> {currency.toUpperCase()} {price}</span></p>
+            <p><span>Tax</span><span> {currency.toUpperCase()} {taxAmount}</span></p>
+            <p className="checkout-total total-border"><span>Total</span><span> {currency.toUpperCase()} {totalAmount}</span></p>
+            {/* Receipt */}
+            <div className="alert alert-light d-flex align-items-center mt-3" role="alert">
+              <i className="bi bi-envelope me-2"></i>
+              Your receipt will be sent to: <strong className="ms-1">{email}</strong>
+            </div>
+
+
+            <div className="checkout-footer mt-4">
+              <span><i className="bi bi-shield-lock-fill"></i> Secure Payment</span>
+              <span><i className="bi bi-lock-fill"></i> SSL Encrypted</span>
+              <span><i className="bi bi-headset"></i> 24/7 Support</span>
+            </div>
+          </div>
+
+
+        </div>
+        {/* Stripe Form */}
+        <div className="col-md-6 mt-5">
+          <div className="payment-card card p-3 h-100" style={{ maxWidth: 500 }}>
+            {clientSecret ? (
+              <Elements stripe={stripePromise} options={options}>
+                <CheckoutForm
+                  clientSecret={clientSecret}
+                  amount={amount}
+                  currency={currency}
+                  product={{ title: "Rental Payment" }}
+                />
+              </Elements>
+            ) : (
+              <div className="loading text-center py-5">Loading payment...</div>
+            )}
+          </div>
+        </div>
+
+
+      </div>
+      {/* Footer */}
+
+    </div>
 
   );
 }
