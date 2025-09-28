@@ -234,19 +234,30 @@ export default function CheckoutSuccessPage() {
         if (data.paymentIntent) {
           console.log("🔎 Full Payment Intent:", data.paymentIntent);
           const pi = data.paymentIntent;
-          // const charge = pi.charges?.data?.[0];
           const charge = data.charge;
-          // const invoicePdfUrl = charge?.receipt_url || "#";
-          // Determine payment method type
-          const type = pi.payment_method_types?.[0] || "unknown";
-          const paymentMethodType =
-            paymentMethodLabels[type] || type.toUpperCase();
+          // ✅ Detect payment method properly (Wallets, Card, etc.)
+          let paymentMethodType = "UNKNOWN";
+          const pmDetails = charge?.payment_method_details;
 
-          // Card brand + last 4 only if it's a card payment
+          if (pmDetails?.type === "card") {
+            if (pmDetails.card?.wallet?.type) {
+              // Wallet payment (GPay, Apple Pay, etc.)
+              paymentMethodType =
+                paymentMethodLabels[pmDetails.card.wallet.type] ||
+                pmDetails.card.wallet.type.toUpperCase();
+            } else {
+              paymentMethodType = "CARD";
+            }
+          } else {
+            const type = pi.payment_method_types?.[0] || "unknown";
+            paymentMethodType = paymentMethodLabels[type] || type.toUpperCase();
+          }
+
+          // ✅ Card details only if available
           const paymentMethodDetails =
-            type === "card" && charge?.payment_method_details?.card
-              ? `${charge.payment_method_details.card.brand.toUpperCase()} **** ${
-                  charge.payment_method_details.card.last4
+            pmDetails?.type === "card" && pmDetails.card
+              ? `${pmDetails.card.brand.toUpperCase()} **** ${
+                  pmDetails.card.last4
                 }`
               : null;
 
@@ -336,6 +347,11 @@ export default function CheckoutSuccessPage() {
           <div className="d-flex justify-content-between mb-1">
             <span className="text-muted">Date & Time</span>
             <span className="fw-medium text-dark">{paymentInfo.date}</span>
+          </div>
+
+          <div className="d-flex justify-content-between mb-1">
+            <span className="text-muted">Amount Paid</span>
+            <span className="fw-medium text-dark">{paymentInfo.amount}</span>
           </div>
           <div className="d-flex justify-content-between">
             <span className="text-muted">Payment Method</span>

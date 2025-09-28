@@ -69,8 +69,7 @@ export async function POST(req) {
     }
 
     // ✅ Manual Tax Calculation (10%)
-    const taxRate = 0.1; // 10% tax
-    const taxAmount = Math.round(amount * taxRate);
+    const taxAmount = Math.round(amount * 0.1);
     const totalAmount = amount + taxAmount;
 
     const paymentIntent = await stripe.paymentIntents.create({

@@ -434,7 +434,7 @@ export default function CheckoutForm({
         >
           {loading
             ? "Processing..."
-            : `Pay ${currency.toUpperCase()} ${amount / 100}`}
+            : `Pay ${currency.toUpperCase()} ${(amount / 100).toFixed(2)}`}
         </button>
       </form>
 

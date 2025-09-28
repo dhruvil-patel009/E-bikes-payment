@@ -222,43 +222,6 @@ export default function CheckoutPageClient() {
   }
 
   return (
-    // <div className="checkout-page container py-5">
-
-
-    //   {/* Timer */}
-    //   {clientSecret && (
-    //     <div className="text-center mb-3 text-danger fw-bold">
-    //       Time left: {Math.floor(timeLeft / 60)}:
-    //       {(timeLeft % 60).toString().padStart(2, "0")}
-    //     </div>
-    //   )}
-
-    //   <div className="checkout-product-info d-flex flex-column align-items-center mb-4">
-    //     <p className="fs-4 fw-bold">
-    //       {currency.toUpperCase()} {price}
-    //     </p>
-    //     {email && (
-    //       <p className="text-muted small">
-    //         Paying as: <strong>{email}</strong>
-    //       </p>
-    //     )}
-    //   </div>
-
-    //   <div className="payment-card mx-auto" style={{ maxWidth: 500 }}>
-    //     {clientSecret ? (
-    //       <Elements stripe={stripePromise} options={options}>
-    //         <CheckoutForm
-    //           clientSecret={clientSecret}
-    //           amount={amount}
-    //           currency={currency}
-    //           product={{ title: "Rental Payment" }}
-    //         />
-    //       </Elements>
-    //     ) : (
-    //       <div className="loading text-center py-5">Loading payment...</div>
-    //     )}
-    //   </div>
-    // </div>
     <div className="checkout-page container py-5">
       {/* Timer */}
       <h1 style={{ color: '#1A3B19' }}>Complete Your Payment</h1>
@@ -299,9 +262,9 @@ export default function CheckoutPageClient() {
               </div>
             </div>
 
-            <p><span>Subtotal</span><span> {currency.toUpperCase()} {price}</span></p>
-            <p><span>Tax</span><span> {currency.toUpperCase()} {taxAmount}</span></p>
-            <p className="checkout-total total-border"><span>Total</span><span> {currency.toUpperCase()} {totalAmount}</span></p>
+            <p><span>Subtotal</span><span> {currency.toUpperCase()} {(price).toFixed(2)}</span></p>
+            <p><span>Tax</span><span> {currency.toUpperCase()} {(taxAmount).toFixed(2)}</span></p>
+            <p className="checkout-total total-border"><span>Total</span><span> {currency.toUpperCase()} ${(totalAmount).toFixed(2)}</span></p>
             {/* Receipt */}
             <div className="alert alert-light d-flex align-items-center mt-3" role="alert">
               <i className="bi bi-envelope me-2"></i>
@@ -325,7 +288,7 @@ export default function CheckoutPageClient() {
               <Elements stripe={stripePromise} options={options}>
                 <CheckoutForm
                   clientSecret={clientSecret}
-                  amount={amount}
+                  amount={Math.round(totalAmount * 100)}
                   currency={currency}
                   product={{ title: "Rental Payment" }}
                 />
