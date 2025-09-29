@@ -164,7 +164,7 @@
 
  */
 
- /* =========================
+/* =========================
    Checkout Page Styles
    ========================= */
 
@@ -205,6 +205,11 @@
 
 .checkout-product-info p {
   margin: 0.2rem 0;
+}
+
+.total-border {
+  border-top: 1px solid #e9ecef;
+  padding-top: 1.5rem;
 }
 
 /* Payment Card (Stripe area) */
@@ -289,10 +294,11 @@
 }
 
 /* NEW: equal height columns */
-.row > .col-md-6 {
+.row>.col-md-6 {
   display: flex;
 }
-.row > .col-md-6 > .card {
+
+.row>.col-md-6>.card {
   flex: 1;
 }
 
@@ -321,24 +327,7 @@
   object-fit: cover;
 }
 
-.rent-now-payment {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  color: #fff;
-  background: linear-gradient(135deg, #1A3B19, #2F5A2C);
-  padding: 8px 22px;
-  border: none;
-  border-radius: 6px;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-}
+
 
 @keyframes shine {
   100% {

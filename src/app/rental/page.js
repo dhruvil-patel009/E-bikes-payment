@@ -548,7 +548,7 @@ DM us now to book & start riding smarter!</p>
             topspeed: "45 MPH",
             
           },
-          price: "60.00 AUD",
+          price: "65.00 AUD",
         },
         {
           name: "E-bike 8-10h",
@@ -560,7 +560,7 @@ DM us now to book & start riding smarter!</p>
             batterylife: "48V 70A",
             topspeed: "45 MPH",
           },
-          price: "65.00 AUD",
+          price: "70.00 AUD",
         },
         {
           name: "E-bike 10-12h",
@@ -572,43 +572,43 @@ DM us now to book & start riding smarter!</p>
             batterylife: "48V 80A",
             topspeed: "45 MPH",
           },
+          price: "80.00 AUD",
+        },
+        {
+          name: "White E-bike",
+          img: "/images/White-E-bike-Product.png",
+          alt: "E-bike 8-10h",
+          specs: {
+            batteryhours: "10-12 hours",
+            motor: 500,
+            batterylife: "48V 70A",
+            topspeed: "45 MPH",
+          },
+          price: "80.00 AUD",
+        },
+        {
+          name: "Black E-bike",
+          img: "/images/Latest-Black-Cycle-Product-26-09.png",
+          alt: "E-bike 8-10h",
+          specs: {
+            batteryhours: "10-12 hours",
+            motor: 500,
+            batterylife: "48V 70A",
+            topspeed: "45 MPH",
+          },
           price: "70.00 AUD",
         },
         {
-          name: "E-bike 8-10h",
-          img: "/images/Product-images-beyond-bikes-product-one-crop (3).png",
+          name: "Red E-bike",
+          img: "/images/24-09-Red-Cycle-Product-Latest.png",
           alt: "E-bike 8-10h",
           specs: {
-            batteryhours: "8-10 hours",
+            batteryhours: "12-15 hours",
             motor: 500,
             batterylife: "48V 70A",
             topspeed: "45 MPH",
           },
-          price: "65.00 AUD",
-        },
-        {
-          name: "E-bike 8-10h",
-          img: "/images/Product-images-beyond-bikes-product-one-crop (3).png",
-          alt: "E-bike 8-10h",
-          specs: {
-            batteryhours: "8-10 hours",
-            motor: 500,
-            batterylife: "48V 70A",
-            topspeed: "45 MPH",
-          },
-          price: "65.00 AUD",
-        },
-        {
-          name: "E-bike 8-10h",
-          img: "/images/Product-images-beyond-bikes-product-one-crop (3).png",
-          alt: "E-bike 8-10h",
-          specs: {
-            batteryhours: "8-10 hours",
-            motor: 500,
-            batterylife: "48V 70A",
-            topspeed: "45 MPH",
-          },
-          price: "65.00 AUD",
+          price: "80.00 AUD",
         }
         
       ].map((bike, idx) => (

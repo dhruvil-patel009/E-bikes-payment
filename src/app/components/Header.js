@@ -307,7 +307,7 @@ export default function Header() {
     ['/rental', 'Rental'],
     ['/contact', 'Contact'],
     ['/about', 'About Us'],
-    ['/makeapayment', 'How to Rent']
+    ['/bookrent', 'Make a Payment']
     
   ];
 
