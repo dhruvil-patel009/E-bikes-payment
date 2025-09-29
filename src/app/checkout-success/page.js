@@ -196,7 +196,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import "../styles/checkout.css";
 
 export default function CheckoutSuccessPage() {
   const [paymentInfo, setPaymentInfo] = useState(null);
@@ -278,6 +277,11 @@ export default function CheckoutSuccessPage() {
             paymentMethodDetails,
             email: pi.receipt_email || "N/A",
             invoicePdfUrl: charge?.receipt_url || "#", // ✅ Use only the charge's receipt_url
+
+            // ✅ Extra fields
+            name: pi.metadata?.customer_name || "N/A",
+            rental_start: pi.metadata?.rental_start || "N/A",
+            rental_end: pi.metadata?.rental_end || "NA",
           });
         }
       } catch (err) {
@@ -373,7 +377,7 @@ export default function CheckoutSuccessPage() {
         {/* Receipt Info */}
         <p className="text-muted text-sm mb-6">
           A copy of the receipt has been sent to{" "}
-          <span className="text-green-600 font-semibold">
+          <span className="Checkout-email font-semibold">
             {paymentInfo.email}
           </span>
         </p>
@@ -381,18 +385,32 @@ export default function CheckoutSuccessPage() {
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-5">
           {/* Download Stripe Invoice PDF */}
-          <a
-            href={paymentInfo.invoicePdfUrl}
+          {/* <a
+            href={paymentInfo.invoicePdfUrl} download 
             target="_blank"
             rel="noopener noreferrer"
           >
             <button className="rent-now-payment">Download Receipt</button>
-          </a>
+          </a> */}
+
+         {/* <a
+  href={`/api/download-receipt?url=${encodeURIComponent(paymentInfo.invoicePdfUrl)}` }target="_blank"
+>
+  <button className="rent-now-payment">Download Receipt</button>
+</a> */}
+
+<a
+  href={`/api/generate-receipt?amount=${encodeURIComponent(paymentInfo.amount)}&date=${encodeURIComponent(paymentInfo.date)}&method=${encodeURIComponent(paymentInfo.paymentMethodDetails || paymentInfo.paymentMethodType)}&receiptId=${encodeURIComponent(paymentInfo.id)}&email=${encodeURIComponent(paymentInfo.email)}&name=${encodeURIComponent(paymentInfo.name)}&rental_start=${encodeURIComponent(paymentInfo.rental_start)}&rental_end=${encodeURIComponent(paymentInfo.rental_end)}`}
+  target="_blank"
+>
+  <button className="rent-now-payment">Download Receipt</button>
+</a>
+
 
           {/* Return Home */}
-          <Link href="/">
-            <button className="btn btn-secondary ms-4">Return to Home</button>
-          </Link>
+          
+            <button className="btn btn-secondary ms-4" onClick={() => (window.location.href = "/")}>Return to Home</button>
+         
         </div>
       </div>
     </div>
