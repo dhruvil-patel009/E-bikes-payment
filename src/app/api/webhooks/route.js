@@ -4,7 +4,9 @@ import sendEmail from "@/lib/sendEmail";
 import fs from "fs";
 import path from "path";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2025-08-27.basil", // match your API version
+});
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 // Helper to load HTML template and inject variables
