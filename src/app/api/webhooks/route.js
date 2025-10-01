@@ -5,7 +5,7 @@ import fs from "fs";
 import path from "path";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: "2025-08-27.basil", // match your API version
+  apiVersion: "2025-08-01", // ✅ use valid Stripe API version
 });
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
@@ -38,18 +38,13 @@ export async function POST(req) {
   const transactionDate = new Date().toLocaleString(); // Current date/time
 
   if (
-    event.type === "payment_intent.succeeded" ||
-    event.type === "payment_intent.payment_failed"
-  ) {
+    event.type === "payment_intent.succeeded" ) {
     const paymentIntent = event.data.object;
-    const { customer_name, rental_start, rental_end } = paymentIntent.metadata;
+    const { customer_name, rental_start, rental_end } = paymentIntent.metadata || {};
 
     // Detect payment method type
     let paymentMethod = "Unknown";
-    if (
-      paymentIntent.payment_method_types &&
-      paymentIntent.payment_method_types.length > 0
-    ) {
+    if (paymentIntent.payment_method_types.length > 0) {
       const type = paymentIntent.payment_method_types[0];
       if (type === "card") paymentMethod = "Card";
       else if (type === "apple_pay") paymentMethod = "Apple Pay";
@@ -76,16 +71,16 @@ export async function POST(req) {
 
     try {
       // Load and inject HTML template for customer
-      const customerHtml = loadTemplate(
-        "Paymentconfirmation.html",
-        templateData
-      );
+       if (paymentIntent.receipt_email) {
+        const customerHtml = loadTemplate("Paymentconfirmation.html", templateData);
 
-      await sendEmail({
-        to: paymentIntent.receipt_email,
-        subject: `✅ Your eBike Rental is ${status}`,
-        html: customerHtml,
-      });
+        await sendEmail({
+          to: paymentIntent.receipt_email,
+          subject: `✅ Your eBike Rental Payment is Completed`,
+          html: customerHtml,
+        });
+      }
+
 
       // Owner email
       const ownerHtml = loadTemplate("PaymentRecive.html", templateData);
@@ -100,6 +95,10 @@ export async function POST(req) {
     } catch (err) {
       console.error("❌ Error sending emails:", err);
     }
+  }
+  // Handle Failed Payment
+  if (event.type === "payment_intent.payment_failed") {
+    console.error("❌ Payment failed:", event.data.object.last_payment_error?.message);
   }
 
   return NextResponse.json({ received: true });

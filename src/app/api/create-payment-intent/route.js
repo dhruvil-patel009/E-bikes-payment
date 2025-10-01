@@ -69,13 +69,14 @@ export async function POST(req) {
     }
 
     // ✅ Manual Tax Calculation (10%)
+     const validEmail = customerEmail?.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
     const taxAmount = Math.round(amount * 0.1);
     const totalAmount = amount + taxAmount;
 
     const paymentIntent = await stripe.paymentIntents.create({
       amount: totalAmount,
       currency,
-      receipt_email: customerEmail || undefined, // ✅ attach email so Stripe can send receipt
+      receipt_email: validEmail ? customerEmail : undefined, // ✅ attach email so Stripe can send receipt
       metadata: {
         customer_name: customerName || "Guest",
         rental_start: rentalStart || "", // ✅ fixed (no more ReferenceError)
