@@ -792,7 +792,7 @@ export default function BookRent() {
                     <div className="d-flex row px-2 justify-content-center align-items-center">
                       <button
                         type="submit"
-                        className="btn text-light rent-now fw-semibold px-4 py-2"
+                        className="btn text-light rent-now fw-semibold px-4 py-2 justify-content-center"
                         style={{ background: "#1a3b19" }}
                       >
                         Pay Now
